@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>유주상 포트폴리오</title>
+<meta name="description" content="한국폴리텍대학 춘천캠퍼스 AI융합과 유주상의 프로젝트 기록. MARU, 내돈내편, Villagen, Lolypoly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="nav">
+  <div class="container">
+    <a class="wordmark" href="#top">유주상</a>
+    <nav aria-label="주요 메뉴">
+      <ul>
+        <li class="nav-hide"><a href="#maru">프로젝트</a></li>
+        <li class="nav-hide"><a href="#questions">질문</a></li>
+        <li><a class="nav-contact" href="#contact">연락하기</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-head">
+        <h1 id="hero-title">만든 것과 남은 것을 나눠 적습니다</h1>
+        <div>
+          <p class="lead">한국폴리텍대학 춘천캠퍼스 AI융합과 유주상의 프로젝트 네 개입니다.</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="#maru">프로젝트 보기</a>
+            <a class="btn" href="https://github.com/lovesome0405">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-top">
+          <h2>프로젝트 장부</h2>
+          <p>2026년 11월 기준</p>
+        </div>
+        <table class="ledger">
+          <thead>
+            <tr><th scope="col">프로젝트</th><th scope="col">무엇을</th><th scope="col">맡은 일</th><th scope="col">지금 상태</th><th scope="col" class="num">최근 갱신</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name"><a href="#maru">MARU</a></td>
+              <td data-label="무엇을">외국인 여행자를 위한 서울 전통문화 코스 추천</td>
+              <td data-label="맡은 일">기획, UI, AI 해설 프롬프트</td>
+              <td data-label="지금 상태">정적 웹 공개. 서버는 뼈대까지</td>
+              <td class="num" data-label="최근 갱신">2026.11</td>
+            </tr>
+            <tr>
+              <td class="name"><a href="#naedon">내돈내편</a></td>
+              <td data-label="무엇을">고령층 음성 금융 안내와 송금 전 피싱 재확인</td>
+              <td data-label="맡은 일">팀장, 기획과 개발</td>
+              <td data-label="지금 상태">공개 배포. 실물 기기 확인 남음</td>
+              <td class="num" data-label="최근 갱신">2026.09</td>
+            </tr>
+            <tr>
+              <td class="name"><a href="#villagen">Villagen</a></td>
+              <td data-label="무엇을">글로 적으면 AI가 3D 가구를 만드는 마을 RPG</td>
+              <td data-label="맡은 일">기획, 게임 안 코드, 문제 해결</td>
+              <td data-label="지금 상태">Tripothon 수상. 생성 기능은 로컬 검증</td>
+              <td class="num" data-label="최근 갱신">2026.10</td>
+            </tr>
+            <tr class="current">
+              <td class="name"><a href="#lolypoly">Lolypoly</a></td>
+              <td data-label="무엇을">폴리텍 춘천캠퍼스 학생용 생활정보 앱</td>
+              <td data-label="맡은 일">기획과 개발, 2인 공동 작업</td>
+              <td data-label="지금 상태">진행 중. 시험 사용 준비</td>
+              <td class="num" data-label="최근 갱신">2026.11</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="sheet-foot">상태는 각 저장소의 진행 기록을 따릅니다. 확인하지 않은 기능은 완료로 적지 않았습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section case" id="maru" aria-labelledby="maru-title">
+    <div class="container split">
+      <div>
+        <h2 id="maru-title">MARU</h2>
+        <p class="lead">외국인 여행자에게 서울 전통문화 코스를 추천하는 모바일 웹입니다.</p>
+        <dl class="facts">
+          <div><dt>만든 것</dt><dd>여행 조건 선택, 추천 코스 6개, 지도 앱 길찾기, 장소 29곳 해설, 4개 언어 전환</dd></div>
+          <div><dt>챗봇 아리</dt><dd>앱 데이터로 답하고, 로컬 Ollama가 있으면 연결합니다</dd></div>
+          <div><dt>구조</dt><dd>GitHub Pages 정적 웹과 JSON 데이터. Spring Boot와 MySQL API는 뼈대</dd></div>
+          <div><dt>남은 것</dt><dd>운영 서버와 DB 배포, 공공데이터 실시간 호출</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="btn" href="https://lovesome0405.github.io/ari/">사이트 열기</a>
+          <a class="btn" href="https://github.com/lovesome0405/ari">저장소</a>
+        </div>
+      </div>
+      <div class="stage">
+        <figure class="phone">
+          <img src="assets/maru.webp" width="780" height="1386" loading="lazy" alt="MARU 첫 화면. 궁궐 야경 이미지 아래에 언어 선택 버튼과 시작하기 버튼이 있다">
+          <figcaption>첫 화면. 서울 시간에 맞춰 낮, 저녁, 밤 이미지가 바뀝니다.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band-ink" aria-labelledby="record-title">
+    <div class="container">
+      <div class="head-split">
+        <h2 id="record-title">직접 확인한 기록</h2>
+        <p>저장소의 진행 기록에서 옮겼습니다. 날짜는 확인한 날입니다.</p>
+      </div>
+      <table class="record">
+        <thead>
+          <tr><th scope="col">날짜</th><th scope="col">프로젝트</th><th scope="col">확인한 것</th><th scope="col">결과</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">2026-09-20</td><td>내돈내편</td><td>자동 테스트, 타입 검사, 프로덕션 빌드</td><td class="result">78개 통과</td></tr>
+          <tr><td class="num">2026-09-20</td><td>내돈내편</td><td>화면 폭 320px부터 1440px까지 회귀 검사</td><td class="result">6개 폭 통과</td></tr>
+          <tr><td class="num">2026-10-05</td><td>Villagen</td><td>온라인 서버의 협동 플레이 설정</td><td class="result">최대 3인</td></tr>
+          <tr><td class="num">2026-11-02</td><td>Lolypoly</td><td>빈 폴더에서 설치와 실제 수집 재현</td><td class="result">54개 통과</td></tr>
+          <tr><td class="num">2026-11-09</td><td>Lolypoly</td><td>Django 테스트 전체</td><td class="result">89개 통과</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section case" id="naedon" aria-labelledby="naedon-title">
+    <div class="container split split--flip">
+      <div class="stage">
+        <figure class="phone">
+          <img src="assets/naedon.webp" width="390" height="693" loading="lazy" alt="내돈내편 첫 화면. 말로 편하게 시작하세요라는 제목 아래 예금 상품 알아보기와 송금 안전 확인 버튼이 있다">
+          <figcaption>첫 화면. 모든 상품과 거래는 시연용 가상 데이터입니다.</figcaption>
+        </figure>
+      </div>
+      <div>
+        <h2 id="naedon-title">내돈내편</h2>
+        <p class="lead">말로 금융 업무를 준비하고, 돈을 보내기 전에 한 번 더 확인합니다.</p>
+        <dl class="facts">
+          <div><dt>만든 것</dt><dd>예금 상품 3종 비교와 예상 이자, 송금 요청의 위험 신호 13종 분석, 강제 보류 6조건, 음성 입력과 읽어 주기</dd></div>
+          <div><dt>판단</dt><dd>AI는 의도와 신호를 정리하고, 최종 위험 등급은 서버 규칙이 정합니다</dd></div>
+          <div><dt>구조</dt><dd>Next.js 16, TypeScript, OpenAI Responses API. 키가 없으면 Mock 모드로 돕니다</dd></div>
+          <div><dt>남은 것</dt><dd>실물 휴대폰 청취와 셀룰러 환경 확인</dd></div>
+        </dl>
+        <p class="note">2026 금융 AI Challenge 출품작, 2인 팀. 저장소는 비공개입니다.</p>
+        <div class="actions">
+          <a class="btn" href="https://naedonnaepyeon.vercel.app">사이트 열기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="questions" aria-labelledby="qa-title">
+    <div class="container qa">
+      <h2 id="qa-title">자주 받는 질문</h2>
+      <div class="qa-list">
+        <details open>
+          <summary>팀 프로젝트에서 직접 한 일은요?</summary>
+          <div class="answer"><p>위 장부의 '맡은 일' 칸에 적었습니다. Villagen은 팀원이 개발을 많이 맡았고, 저는 기획과 게임 안 코드, 문제 해결을 맡았습니다. 지금은 그 코드를 직접 설명하고 고칠 수 있도록 공부하고 있습니다.</p></div>
+        </details>
+        <details>
+          <summary>AI 도구는 어떻게 쓰나요?</summary>
+          <div class="answer"><p>Codex와 Claude로 구현을 함께 하고, 결정과 진행은 저장소의 DECISIONS.md와 PROGRESS.md에 남깁니다. 테스트하지 않은 기능은 완료로 적지 않습니다.</p></div>
+        </details>
+        <details>
+          <summary>유료 API가 없으면 어떻게 되나요?</summary>
+          <div class="answer"><p>키가 없어도 핵심 흐름이 돌도록 만듭니다. 내돈내편은 Mock 모드로, MARU의 아리는 앱 데이터 답변으로 바뀝니다.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section well" id="villagen" aria-labelledby="villagen-title">
+    <div class="container">
+      <div class="head-split">
+        <div>
+          <h2 id="villagen-title">Villagen</h2>
+          <p class="lead">원하는 물건을 글로 적으면 AI가 3D 가구로 만들어 주는 마을 RPG입니다.</p>
+        </div>
+        <div>
+          <p class="prize">TRIPOTHON S1 SEOUL, Best Use of Tripo 수상</p>
+          <p class="caption">3인 팀 SAMHAP Games. 2026년 10월.</p>
+        </div>
+      </div>
+      <figure class="wide">
+        <img src="assets/villagen.webp" width="960" height="600" loading="lazy" alt="Villagen 게임 화면. 섬 마을 광장에 캐릭터가 서 있고 오른쪽 위에 지도가 있다">
+        <figcaption>마을 화면. Godot로 만든 클라이언트입니다.</figcaption>
+      </figure>
+      <dl class="facts-row">
+        <div><dt>흐름</dt><dd>주민 부탁, AI 가구 생성, 선물과 배치, 마을 변화</dd></div>
+        <div><dt>구조</dt><dd>Godot 클라이언트, Python 서버, SQLite, LLM과 Tripo로 GLB 생성</dd></div>
+        <div><dt>지금 상태</dt><dd>가구 공방은 로컬 검증. 공개 서버의 유료 생성은 꺼 두었습니다. <a href="https://github.com/NormalMan0228/tripo_s1">저장소</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tools-title">
+    <div class="container tools">
+      <h2 id="tools-title">쓰는 도구</h2>
+      <dl class="tool-rows">
+        <div><dt>웹</dt><dd>HTML, CSS, JavaScript, Django, Flask, Spring Boot</dd></div>
+        <div><dt>데이터</dt><dd>Python, SQL, MySQL, SQLite, Supabase PostgreSQL</dd></div>
+        <div><dt>그 밖</dt><dd>Godot, Unity, Flutter, Linux</dd></div>
+        <div><dt>자격증</dt><dd>ADsP, 리눅스마스터 2급</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section well case" id="lolypoly" aria-labelledby="lolypoly-title">
+    <div class="container split split--even">
+      <div>
+        <h2 id="lolypoly-title">Lolypoly</h2>
+        <p class="lead">폴리텍 춘천캠퍼스 학생이 식단, 학사일정, 공지를 한 화면에서 봅니다.</p>
+        <dl class="facts">
+          <div><dt>실제 데이터</dt><dd>공식 홈페이지의 식단, 학사일정, 공지를 Playwright로 모아 둡니다</dd></div>
+          <div><dt>실시간</dt><dd>학교 버스 위치, 국토교통부 TAGO API. 저장소 최신본에 구현</dd></div>
+          <div><dt>화면만</dt><dd>시간표와 MY는 아직 예시 데이터입니다</dd></div>
+          <div><dt>구조</dt><dd>Django 5.2, SQLite, PWA. Render 무료 Docker로 배포</dd></div>
+          <div><dt>다음</dt><dd>학생 20~30명 시험 사용 후 개선</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="btn" href="https://lolypoly.lolypoly.workers.dev/">사이트 열기</a>
+          <a class="btn" href="https://github.com/chanmini584-ux/LOLYPOLY">저장소</a>
+        </div>
+      </div>
+      <div class="stage">
+        <figure class="phone">
+          <img src="assets/lolypoly.webp" width="490" height="871" loading="lazy" alt="Lolypoly 홈 화면. 오늘 날짜 아래에 조식, 중식, 석식 메뉴와 다가오는 학사일정이 있다">
+          <figcaption>홈 화면. 오늘 식단과 가까운 학사일정을 먼저 보여 줍니다.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div>
+        <h2 id="contact-title">연락하기</h2>
+        <p class="lead">인턴, 공모전 팀, 프로젝트 이야기 모두 반갑습니다.</p>
+      </div>
+      <dl class="contact-lines">
+        <div><dt>GitHub</dt><dd><a href="https://github.com/lovesome0405">lovesome0405</a></dd></div>
+        <div><dt>이메일</dt><dd><a href="mailto:lovesome0405@naver.com">lovesome0405@naver.com</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div class="container">
+    <p>2026 유주상. 이 페이지의 화면은 모두 각 프로젝트의 실제 화면입니다. 팀 프로젝트의 저장소와 화면 저작권은 각 팀에 있습니다.</p>
+  </div>
+</footer>
+</body>
+</html>
