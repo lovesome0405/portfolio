@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>몬티홀 100 | 직접 플레이하고 확률 실험하기</title>
-<meta name="description" content="문 100개로 직접 플레이하는 몬티홀 게임. 선택을 유지할지 바꿀지 결정하고 자동 실험으로 결과를 비교해 보세요.">
+<title>몬티홀 복권 100 | 복권 뽑기와 확률 실험</title>
+<meta name="description" content="복권 100장 중 1장만 당첨되는 몬티홀 게임. 1장을 직접 뽑아보고 10,000회 실험과 확률을 비교해 보세요.">
 <style>
 :root{--navy:#172c46;--blue:#3159d6;--green:#118765;--paper:#f2f5fa;--border:#dae3ed;--muted:#63748b;--ink:#192b42}
 *{box-sizing:border-box}
@@ -42,7 +42,32 @@ h2{font-size:20px;letter-spacing:-.6px;margin:0}
 .door.other{background:#dcf7ec;color:#0c7954;border:2px solid #15a174}
 .door.opened{background:#f0f3f6;border:1px dashed #e1e7ed;color:#bbc5d0;font-size:13px}
 .door.win{background:#d7f5e5;border:2px solid #129c66;color:#056e4b;font-size:16px}
-.door.lose{font-size:16px}
+.door.lose{font-size:12px;font-weight:900}
+.door{position:relative;border:1.5px dashed #c9d9eb;border-radius:7px;background:linear-gradient(145deg,#fff,#eef4ff);box-shadow:0 2px 0 #dce6f1;transform-origin:50% 50%;color:#3b5478;letter-spacing:-.2px}
+.door:before{content:"TICKET";position:absolute;top:3px;left:0;right:0;color:#aab9cb;font-size:6px;letter-spacing:1.3px;font-weight:900}
+.door:not(:disabled):hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 6px 12px #5073a12a}
+.door.chosen{box-shadow:0 0 0 3px #3159d61c;background:#e2edff}
+.door.other{box-shadow:0 0 0 3px #11876522;background:#dbf9ed}
+.door.opened{color:#b8c0c9;background:#f3f5f8;border:1px dashed #e0e6ec;box-shadow:none;filter:saturate(.25)}
+.door.opened:before,.door.win:before,.door.lose:before{content:""}
+.door.win{font-size:12px;box-shadow:0 0 0 3px #11876526;animation:prize-pulse .65s ease-out}
+.door.lose{background:#f5f5f5}
+@keyframes prize-pulse{0%{transform:scale(.88)}55%{transform:scale(1.13)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.door{animation:none!important;transition:none!important}}
+.ticketintro{margin:0 0 15px;font-size:13px;color:#63748b}
+.ticketintro strong{color:#243e61}
+.whycards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.whycard{background:#f5f8fc;border:1px solid #e4ecf5;border-radius:12px;padding:15px}
+.whycard span{display:block;color:#72829a;font-size:12px}
+.whycard b{display:block;font-size:22px;color:#1b385f}
+.whycard b.green{color:#118765}
+.exampletable{border-collapse:collapse;width:100%;font-size:13px;margin-top:10px}
+.exampletable td,.exampletable th{text-align:left;border-bottom:1px solid #e3eaf2;padding:9px 6px}
+.exampletable th{color:#466385;font-weight:800}
+.helptitle{font-weight:900;color:#223b56;font-size:16px;margin:8px 0}
+.helpwide .helpbody{display:block}
+.footnote{font-size:12px;color:#708198}
+.tagline{font-size:12px;color:#778fae;font-weight:800;letter-spacing:.5px}
 .legend{display:flex;gap:15px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:16px}
 .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;background:#e6edff;border:1px solid #3159d6}
 .dot.green{background:#dcf7ec;border-color:#15a174}
@@ -99,24 +124,24 @@ footer{text-align:center;color:#8795a9;font-size:12px;margin-top:32px}
 </style>
 </head>
 <body>
-<header><div class="wrap"><div class="brand">🚪 몬티홀 100 <small>PROBABILITY LAB</small></div><div class="right">PC 전용 확률 게임 · 설치 없이 플레이</div></div></header>
+<header><div class="wrap"><div class="brand">🎟️ 몬티홀 복권 100 <small>PROBABILITY LAB</small></div><div class="right">PC 전용 확률 게임 · 설치 없이 플레이</div></div></header>
 <main class="wrap">
-<section class="top"><div><div class="eyebrow">PLAY FIRST · UNDERSTAND LATER</div><h1>문이 2개 남았다면, 확률도 반반일까?</h1><p class="subtitle">문 100개 중 자동차는 단 1대. 먼저 직접 플레이하고, 결과를 실험으로 확인해 봐.</p></div><div class="chips"><span class="chip">🚪 문 100개</span><span class="chip">🚗 자동차 1대</span><span class="chip">🐐 염소 99마리</span></div></section>
+<section class="top"><div><div class="eyebrow">PLAY FIRST · UNDERSTAND LATER</div><h1>100장 중 단 1장만 당첨! 바꿔 뽑을래?</h1><p class="subtitle">복권을 직접 골라봐. 사회자가 꽝 98장을 공개한 뒤, 마지막 두 장 중 하나를 결정하는 게임이야.</p></div><div class="chips"><span class="chip">🎟️ 복권 100장</span><span class="chip">🎉 당첨 1장</span><span class="chip">❌ 꽝 99장</span></div></section>
 <div class="layout">
 <section class="panel game">
 <div class="titleline"><h2>01. 직접 플레이</h2><span class="hint" id="round">1회차</span></div>
-<div class="alert" aria-live="polite"><b id="status">문 100개 중 하나를 클릭해 봐.</b><span id="substatus">자동차가 있는 문은 무작위로 정해져 있어.</span></div>
-<div class="doorgrid" id="doorgrid" aria-label="문 100개"></div>
-<div class="legend"><span><i class="dot"></i> 처음 고른 문</span><span><i class="dot green"></i> 사회자가 남긴 문</span><span><i class="dot gray"></i> 공개된 염소 문</span></div>
+<div class="alert" aria-live="polite"><b id="status">복권 100장 중 마음에 드는 한 장을 뽑아봐.</b><span id="substatus">당첨 복권은 단 한 장, 게임마다 무작위로 정해져 있어.</span></div>
+<p class="ticketintro">아래 <strong>100장의 번호 복권</strong> 중 한 장을 클릭해 선택해 봐. 당첨 위치는 보이지 않아.</p><div class="doorgrid" id="doorgrid" aria-label="번호 복권 100장"></div>
+<div class="legend"><span><i class="dot"></i> 내가 뽑은 복권</span><span><i class="dot green"></i> 사회자가 남긴 복권</span><span><i class="dot gray"></i> 공개된 꽝 복권</span></div>
 </section>
 <aside class="panel side">
 <div class="titleline"><h2>게임 진행</h2><span class="hint" id="stagecount">STEP 1 / 3</span></div>
 <div class="step" id="step">STEP 01 · FIRST PICK</div>
-<h3 id="instruction">어떤 문에 자동차가 있을까?</h3>
-<p id="detail">왼쪽 100개의 문 중 하나를 골라봐. 선택을 마치면 사회자가 염소 문 98개를 열어줄 거야.</p>
+<h3 id="instruction">어느 복권이 당첨일까?</h3>
+<p id="detail">왼쪽에 놓인 복권 100장 중 1장을 뽑아봐. 사회자는 당첨 번호를 알고, 꽝 복권 98장을 공개해.</p>
 <div id="result"></div>
 <div class="actions" id="actions"><button class="btn soft" disabled>먼저 문을 하나 선택해 봐</button></div>
-<details class="help"><summary>💡 왜 50:50이 아닐까? 설명 보기</summary><p>자동차 위치를 아는 사회자가 반드시 염소 문만 골라 열기 때문이야. 처음 선택이 틀렸을 확률 99%가, 사회자가 남긴 다른 문에 그대로 유지돼.</p></details>
+<details class="help"><summary>💡 2장인데 왜 반반이 아니지?</summary><p>처음 네 복권 1장이 당첨일 확률은 1%, 사회자가 가진 나머지 99장 중 당첨이 있을 확률은 99%야. 사회자는 당첨 복권을 알고 꽝 98장만 보여줘. 그래서 네가 처음에 꽝을 뽑았던 99%의 경우, 남은 다른 1장이 무조건 당첨이야.</p></details>
 </aside>
 </div>
 <div class="sectiontitle"><h2>02. 컴퓨터 자동 실험</h2><span class="hint">당첨 확률이 정말 다른지 직접 확인해 봐</span></div>
@@ -128,13 +153,26 @@ footer{text-align:center;color:#8795a9;font-size:12px;margin-top:32px}
 <div class="barlabel"><span>🟢 선택 변경</span><span id="switchtext">—%</span></div><div class="track"><div class="fill switch" id="switchbar"></div></div><div class="barfoot"><span>이론값 99%</span><span id="switchwins">0회 당첨</span></div>
 <div style="margin-top:22px"><button class="btn soft" id="resetsim">자동 실험 기록 초기화</button></div>
 </section>
-<section class="panel summary"><h2>내 플레이 기록</h2><div class="numbers"><div class="number"><b id="rounds">0</b><span>플레이 횟수</span></div><div class="number"><b id="wins">0</b><span>자동차 당첨</span></div></div>
+<section class="panel summary"><h2>내 복권 뽑기 기록</h2><div class="numbers"><div class="number"><b id="rounds">0</b><span>플레이 횟수</span></div><div class="number"><b id="wins">0</b><span>당첨 횟수</span></div></div>
 <div class="row"><span>모든 판에서 유지했다면</span><b id="hypstay">0회 당첨</b></div>
 <div class="row"><span>모든 판에서 바꿨다면</span><b id="hypswitch">0회 당첨</b></div>
 <div style="margin-top:20px"><button class="btn soft" id="resetmanual">플레이 기록 초기화</button></div></section>
 </div>
-<details class="helpwide"><summary>📖 원리가 궁금할 때만 클릭해서 설명 보기</summary><div class="helpbody"><div><b>핵심은 처음에 틀렸을 확률이 99%라는 거야.</b><p>사회자는 정답을 알고 있기 때문에 자동차가 있는 문을 열지 않아. 네가 처음 틀렸다면(99%) 사회자가 남긴 다른 문이 무조건 자동차야. 따라서 바꾸면 99%로 당첨돼.</p><p>문 두 개가 같은 조건에서 무작위로 남은 것이 아니기 때문에 각각 50%가 되는 게 아니야. 만약 마지막에 자동차를 다시 무작위로 배치한다면 그때는 50:50이 맞아.</p></div><div class="maths">처음 선택 유지 성공: 1 / 100 = <strong>1%</strong><br>다른 문으로 변경 성공: 99 / 100 = <b>99%</b></div></div></details>
-<footer>몬티홀 100 · 게임은 이 브라우저에서만 진행되며 친구들의 기록과 공유되지 않아 · 사회자는 항상 염소 문 98개만 공개해</footer>
+<details class="helpwide"><summary>📖 왜 바꾸면 99%나 당첨될까? · 이해하기 쉬운 설명</summary>
+<div class="helpbody">
+<div class="helptitle">① 네가 1장, 사회자가 나머지 99장을 갖고 시작해.</div>
+<p>100장 중 당첨은 딱 1장이야. 네가 처음 뽑은 복권이 당첨일 확률은 <b>1%</b>, 네가 안 뽑은 99장 사이에 당첨이 있을 확률은 <b>99%</b>겠지?</p>
+<div class="whycards"><div class="whycard"><span>내가 가진 복권 1장</span><b>1% 당첨</b></div><div class="whycard"><span>사회자가 가진 복권 99장</span><b class="green">99% 당첨</b></div></div>
+<div class="helptitle">② 사회자가 '꽝인 걸 아는' 98장을 공개해.</div>
+<p>사회자는 당첨 번호를 알고 있어. 그래서 자기 쪽 99장 중 <b>꽝 98장만</b> 골라서 공개하고, 딱 1장을 남겨. 원래 그 99장에 있었던 당첨 가능성 99%가 사라지는 걸까? 아니지. <b>당첨 복권을 일부러 남겼기 때문</b>이야.</p>
+<div class="helptitle">③ 같은 게임을 10,000번 반복했다고 생각해 봐.</div>
+<p>매번 복권 100장 중 하나를 처음 뽑고, 사회자는 꽝 98장을 공개해. 10,000번을 반복하면 대략 이런 일이 생겨.</p>
+<table class="exampletable"><thead><tr><th>처음 뽑았던 복권</th><th>대략 몇 번?</th><th>유지하면</th><th>바꾸면</th></tr></thead><tbody><tr><td>당첨이었다</td><td>100번 (1%)</td><td>당첨</td><td>꽝</td></tr><tr><td>꽝이었다</td><td>9,900번 (99%)</td><td>꽝</td><td>당첨</td></tr></tbody></table>
+<div class="whycards"><div class="whycard"><span>10,000번 내내 유지하면</span><b>약 100번 당첨</b></div><div class="whycard"><span>10,000번 내내 바꾸면</span><b class="green">약 9,900번 당첨</b></div></div>
+<p>중요한 건 마지막에 복권이 2장 남았다는 사실이 아니라, <b>사회자가 당첨 번호를 알고 꽝만 제거했다</b>는 사실이야. 마지막에 복권을 새로 섞는 독립시행이 아니어서 50:50이 되지 않아.</p>
+<p class="footnote">위 당첨 횟수는 10,000번 반복했을 때의 기대값이야. 실제 자동 실험 결과는 무작위라 조금 다를 수 있어. 사회자가 당첨 번호를 모르고 무작위로 98장을 공개했다면 조건이 달라져.</p>
+</div></details>
+<footer>몬티홀 복권 100 · 게임과 실험 기록은 내 브라우저에만 저장돼 · 사회자는 당첨 번호를 알고, 항상 꽝 98장만 공개해</footer>
 </main>
 <script>
 (function(){
@@ -146,7 +184,7 @@ function $(id){return document.getElementById(id)}
 function rnd(n){return Math.floor(Math.random()*n)+1}
 function load(){try{var saved=JSON.parse(localStorage.getItem(key)||"{}");if(saved.manual&&Number.isInteger(saved.manual.rounds))manual=saved.manual;if(saved.sim&&Number.isInteger(saved.sim.rounds))sim=saved.sim}catch(e){}}
 function save(){try{localStorage.setItem(key,JSON.stringify({manual:manual,sim:sim}))}catch(e){}}
-for(var i=1;i<=100;i++){var b=document.createElement("button");b.type="button";b.className="door";b.textContent=i;b.setAttribute("aria-label",i+"번 문");(function(n){b.addEventListener("click",function(){select(n)})})(i);grid.appendChild(b);buttons.push(b)}
+for(var i=1;i<=100;i++){var b=document.createElement("button");b.type="button";b.className="door";b.textContent=i;b.setAttribute("aria-label",i+"번 복권");(function(n){b.addEventListener("click",function(){select(n)})})(i);grid.appendChild(b);buttons.push(b)}
 function setActions(items){var area=$("actions");area.innerHTML="";items.forEach(function(it){var b=document.createElement("button");b.textContent=it[0];b.className="btn "+it[1];b.onclick=it[2];area.appendChild(b)})}
 function select(n){if(stage!=="pick")return;pick=n;stage="selected";other=0;render()}
 function reveal(){if(stage!=="selected")return;other=(pick===prize)?((pick+rnd(99)-1)%100)+1:prize;stage="offer";render()}
@@ -154,21 +192,21 @@ function choose(change){if(stage!=="offer")return;final=change?other:pick;stage=
 function newRound(){prize=rnd(100);pick=0;other=0;final=0;stage="pick";render()}
 function render(){
 buttons.forEach(function(b,i){var n=i+1, opened=(stage==="offer"||stage==="done")&&n!==pick&&n!==other;b.className="door";b.disabled=stage!=="pick";b.textContent=n;
-if(opened){b.classList.add("opened");b.textContent="🐐";}else if(stage==="done"&&n===prize){b.classList.add("win");b.textContent="🚗";}else if(stage==="done"&&(n===pick||n===other)){b.classList.add("lose");b.textContent="🐐";}else if(n===pick){b.classList.add("chosen")}else if(n===other){b.classList.add("other")}
+if(opened){b.classList.add("opened");b.textContent="꽝";}else if(stage==="done"&&n===prize){b.classList.add("win");b.textContent="🎉당첨";}else if(stage==="done"&&(n===pick||n===other)){b.classList.add("lose");b.textContent="꽝";}else if(n===pick){b.classList.add("chosen")}else if(n===other){b.classList.add("other")}
 });
 $("round").textContent=(manual.rounds+(stage==="done"?0:1))+"회차";
 $("result").innerHTML="";
 if(stage==="pick"){
-$("stagecount").textContent="STEP 1 / 3";$("step").textContent="STEP 01 · FIRST PICK";$("status").textContent="문 100개 중 하나를 클릭해 봐.";$("substatus").textContent="자동차는 100개 문 중 하나 뒤에 있어.";$("instruction").textContent="어떤 문에 자동차가 있을까?";$("detail").textContent="왼쪽의 문을 클릭하면 선택이 확정돼.";setActions([["먼저 문을 선택해 봐","soft",function(){}]]);$("actions").firstChild.disabled=true;
+$("stagecount").textContent="STEP 1 / 3";$("step").textContent="STEP 01 · FIRST PICK";$("status").textContent="복권 100장 중 하나를 뽑아봐.";$("substatus").textContent="100장 중 딱 1장만 당첨이야.";$("instruction").textContent="어떤 번호가 당첨 복권일까?";$("detail").textContent="번호 복권 하나를 클릭해 선택해 봐.";setActions([["먼저 복권을 선택해 봐","soft",function(){}]]);$("actions").firstChild.disabled=true;
 }else if(stage==="selected"){
-$("stagecount").textContent="STEP 2 / 3";$("step").textContent="STEP 02 · HOST REVEAL";$("status").textContent=pick+"번 문을 골랐어!";$("substatus").textContent="사회자는 자동차의 위치를 알고 있어.";$("instruction").textContent="사회자가 염소 문 98개를 열어줄게.";$("detail").textContent="자동차가 있는 문은 절대로 열지 않고, 문 2개만 남겨.";setActions([["염소 문 98개 열기 →","blue",reveal],["처음부터 다시 고르기","soft",newRound]]);
+$("stagecount").textContent="STEP 2 / 3";$("step").textContent="STEP 02 · HOST REVEAL";$("status").textContent=pick+"번 복권을 뽑았어!";$("substatus").textContent="사회자는 당첨 번호를 알고 있어.";$("instruction").textContent="사회자가 꽝 복권 98장을 공개할게.";$("detail").textContent="당첨 복권은 절대로 공개하지 않고, 2장만 남겨.";setActions([["꽝 복권 98장 공개하기 →","blue",reveal],["처음부터 다시 뽑기","soft",newRound]]);
 }else if(stage==="offer"){
-$("stagecount").textContent="STEP 3 / 3";$("step").textContent="STEP 03 · MAKE A CHOICE";$("status").textContent="염소 문 98개가 공개됐어!";$("substatus").textContent=pick+"번과 "+other+"번 문만 닫혀 있어.";$("instruction").textContent="처음 선택을 유지할까, 바꿀까?";$("detail").textContent="어느 쪽이 더 유리하다고 생각해? 마음대로 결정해 봐.";setActions([["처음 "+pick+"번 문 유지하기","outline",function(){choose(false)}],["다른 "+other+"번 문으로 바꾸기","green",function(){choose(true)}]]);
+$("stagecount").textContent="STEP 3 / 3";$("step").textContent="STEP 03 · MAKE A CHOICE";$("status").textContent="꽝 복권 98장이 공개됐어!";$("substatus").textContent=pick+"번과 "+other+"번 복권만 남았어.";$("instruction").textContent="복권을 유지할까, 바꿔 뽑을까?";$("detail").textContent="두 장만 남았지만 둘의 당첨 확률은 같지 않을 수 있어.";setActions([["처음 "+pick+"번 복권 유지","outline",function(){choose(false)}],["다른 "+other+"번 복권으로 바꾸기","green",function(){choose(true)}]]);
 }else{
 var win=final===prize;
-$("stagecount").textContent="RESULT";$("step").textContent="RESULT · GAME OVER";$("status").textContent=win?"🎉 자동차 당첨!":"🐐 아쉽게도 염소야!";$("substatus").textContent="자동차는 "+prize+"번 문 뒤에 있었어.";$("instruction").textContent=win?"이번 선택은 성공했어!":"이번 선택은 실패했어!";$("detail").textContent="처음 선택 "+pick+"번 · 최종 선택 "+final+"번";
-var r=document.createElement("div");r.className="result"+(win?"":" bad");r.innerHTML="<strong>"+(win?"🚗 자동차 당첨!":"🐐 꽝! 다음 판에 도전")+"</strong><span>정답 "+prize+"번 · 네 최종 선택 "+final+"번</span>";$("result").appendChild(r);
-setActions([["다음 게임 시작 →","blue",newRound]]);
+$("stagecount").textContent="RESULT";$("step").textContent="RESULT · GAME OVER";$("status").textContent=win?"🎉 당첨 복권이야!":"❌ 꽝 복권이야!";$("substatus").textContent="당첨 번호는 "+prize+"번이었어.";$("instruction").textContent=win?"이번에는 당첨!":"아쉽지만 이번에는 꽝!";$("detail").textContent="처음 뽑은 복권 "+pick+"번 · 최종 "+final+"번";
+var r=document.createElement("div");r.className="result"+(win?"":" bad");r.innerHTML="<strong>"+(win?"🎉 복권 당첨!":"❌ 꽝! 다음 판에 도전")+"</strong><span>당첨 번호 "+prize+"번 · 네 최종 선택 "+final+"번</span>";$("result").appendChild(r);
+setActions([["복권 다시 뽑기 →","blue",newRound]]);
 }
 $("rounds").textContent=manual.rounds.toLocaleString("ko-KR");$("wins").textContent=manual.wins.toLocaleString("ko-KR");$("hypstay").textContent=manual.stay+"회 당첨";$("hypswitch").textContent=manual.switch+"회 당첨";
 }
