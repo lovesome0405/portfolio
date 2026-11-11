@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>몬티홀 100 | 직접 플레이하고 확률 실험하기</title>
+<meta name="description" content="문 100개로 직접 플레이하는 몬티홀 게임. 선택을 유지할지 바꿀지 결정하고 자동 실험으로 결과를 비교해 보세요.">
+<style>
+:root{--navy:#172c46;--blue:#3159d6;--green:#118765;--paper:#f2f5fa;--border:#dae3ed;--muted:#63748b;--ink:#192b42}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:1050px;background:var(--paper);color:var(--ink);font:15px/1.55 "Pretendard","Malgun Gothic",-apple-system,BlinkMacSystemFont,sans-serif}
+button,summary{cursor:pointer;font:inherit}
+button:focus-visible,summary:focus-visible{outline:3px solid #8fbaff;outline-offset:2px}
+.wrap{width:min(1400px,calc(100% - 72px));margin:auto}
+header{background:var(--navy);color:white;padding:17px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:18px;font-weight:900;letter-spacing:-.5px}
+.brand small{font-size:11px;opacity:.62;margin-left:12px;font-weight:600;letter-spacing:1.2px}
+header .right{font-size:12px;color:#c8d9ee}
+main{padding:32px 0 68px}
+.top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:23px;gap:22px}
+.eyebrow{font-size:11px;font-weight:800;color:#4776d9;letter-spacing:2px;margin-bottom:5px}
+h1{font-size:33px;margin:0 0 8px;letter-spacing:-1.4px;line-height:1.3}
+.subtitle{margin:0;color:var(--muted)}
+.chips{display:flex;gap:8px}
+.chip{background:white;border:1px solid var(--border);border-radius:30px;padding:7px 12px;font-size:12px;font-weight:700;white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(650px,1.65fr) minmax(308px,1fr);gap:20px;align-items:stretch}
+.panel{background:white;border:1px solid var(--border);border-radius:20px;box-shadow:0 8px 25px #172c4608}
+.game{padding:25px}
+.titleline{display:flex;align-items:center;justify-content:space-between;gap:10px}
+h2{font-size:20px;letter-spacing:-.6px;margin:0}
+.hint{font-size:12px;color:var(--muted)}
+.alert{background:#f1f5fe;border:1px solid #e0e8fa;border-radius:12px;margin:16px 0;padding:14px 16px}
+.alert b{display:block;color:#204d9d}
+.alert span{display:block;color:#647995;font-size:12px;margin-top:2px}
+.doorgrid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px}
+.door{height:52px;border-radius:9px;border:1px solid #dbe2eb;background:#f8fafc;color:#586b80;font-weight:800;padding:2px;transition:.12s}
+.door:not(:disabled):hover{background:#e9f0ff;transform:translateY(-2px);border-color:#86a4e7}
+.door:disabled{cursor:default}
+.door.chosen{background:#e6edff;color:#214bc0;border:2px solid #3159d6}
+.door.other{background:#dcf7ec;color:#0c7954;border:2px solid #15a174}
+.door.opened{background:#f0f3f6;border:1px dashed #e1e7ed;color:#bbc5d0;font-size:13px}
+.door.win{background:#d7f5e5;border:2px solid #129c66;color:#056e4b;font-size:16px}
+.door.lose{font-size:16px}
+.legend{display:flex;gap:15px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:16px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;background:#e6edff;border:1px solid #3159d6}
+.dot.green{background:#dcf7ec;border-color:#15a174}
+.dot.gray{background:#f0f3f6;border-color:#e1e7ed}
+.side{padding:26px;display:flex;flex-direction:column}
+.step{font-size:12px;color:#3159d6;font-weight:800;letter-spacing:1px;margin:18px 0 5px}
+.side h3{font-size:23px;line-height:1.35;letter-spacing:-.7px;margin:0 0 9px}
+.side p{font-size:14px;color:var(--muted);margin:0 0 24px}
+.actions{display:grid;gap:10px}
+.btn{border-radius:11px;border:1px solid transparent;padding:12px 16px;font-weight:800;min-height:46px}
+.btn.blue{background:#3159d6;color:#fff}
+.btn.green{background:#118765;color:#fff}
+.btn.outline{background:white;color:var(--ink);border-color:#cdd9e7}
+.btn.soft{background:#f1f5fb;color:#506783}
+.btn:hover{filter:brightness(.96)}
+.btn:disabled{opacity:.45;cursor:default}
+.small{font-size:12px;color:var(--muted)}
+.result{padding:16px;border:1px solid #b9e7d1;background:#effbf3;border-radius:13px;margin:10px 0}
+.result.bad{background:#fff3ed;border-color:#f4d4c1}
+.result strong{font-size:19px;display:block;margin-bottom:5px}
+.result span{font-size:13px;color:#50647c}
+details.help{margin-top:auto;padding-top:24px}
+details.help summary{list-style:none;background:#f2f6ff;border:1px solid #dfe8fa;border-radius:12px;padding:12px 15px;font-weight:800;color:#2b5db7}
+details.help summary::-webkit-details-marker{display:none}
+details.help summary:after{content:"＋";float:right}
+details.help[open] summary:after{content:"－"}
+details.help p{font-size:13px;margin:10px 2px 0;line-height:1.8}
+.sectiontitle{display:flex;align-items:center;justify-content:space-between;margin:30px 0 15px}
+.sectiontitle h2{font-size:23px}
+.bottom{display:grid;grid-template-columns:minmax(650px,1.65fr) minmax(308px,1fr);gap:20px}
+.sim{padding:25px}
+.simbuttons{display:flex;gap:10px;margin:20px 0}
+.simbuttons .btn{flex:1}
+.barlabel{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:750;margin:20px 0 7px}
+.track{background:#eff2f7;border-radius:30px;height:20px;overflow:hidden}
+.fill{height:100%;width:0;transition:width .25s;background:#dc9a4c}
+.fill.switch{background:#13a57a}
+.barfoot{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:5px}
+.summary{padding:25px}
+.numbers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.number{padding:17px;border-radius:12px;background:#f3f6fb}
+.number b{display:block;font-size:29px}
+.number span{font-size:12px;color:var(--muted)}
+.row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #eef2f6;font-size:13px}
+.helpwide{margin-top:25px;border:1px solid var(--border);border-radius:17px;background:white}
+.helpwide summary{padding:21px 25px;list-style:none;font-weight:800;font-size:17px}
+.helpwide summary::-webkit-details-marker{display:none}
+.helpwide summary:after{content:"설명 펼치기 ＋";float:right;font-size:12px;color:#3159d6}
+.helpwide[open] summary:after{content:"설명 접기 －"}
+.helpbody{padding:0 25px 22px;display:grid;grid-template-columns:1.5fr 1fr;gap:30px;color:var(--muted);font-size:14px}
+.maths{border-radius:12px;background:#f1f6fb;padding:15px;color:#233b58;line-height:2}
+.maths b{color:#078764}
+footer{text-align:center;color:#8795a9;font-size:12px;margin-top:32px}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand">🚪 몬티홀 100 <small>PROBABILITY LAB</small></div><div class="right">PC 전용 확률 게임 · 설치 없이 플레이</div></div></header>
+<main class="wrap">
+<section class="top"><div><div class="eyebrow">PLAY FIRST · UNDERSTAND LATER</div><h1>문이 2개 남았다면, 확률도 반반일까?</h1><p class="subtitle">문 100개 중 자동차는 단 1대. 먼저 직접 플레이하고, 결과를 실험으로 확인해 봐.</p></div><div class="chips"><span class="chip">🚪 문 100개</span><span class="chip">🚗 자동차 1대</span><span class="chip">🐐 염소 99마리</span></div></section>
+<div class="layout">
+<section class="panel game">
+<div class="titleline"><h2>01. 직접 플레이</h2><span class="hint" id="round">1회차</span></div>
+<div class="alert" aria-live="polite"><b id="status">문 100개 중 하나를 클릭해 봐.</b><span id="substatus">자동차가 있는 문은 무작위로 정해져 있어.</span></div>
+<div class="doorgrid" id="doorgrid" aria-label="문 100개"></div>
+<div class="legend"><span><i class="dot"></i> 처음 고른 문</span><span><i class="dot green"></i> 사회자가 남긴 문</span><span><i class="dot gray"></i> 공개된 염소 문</span></div>
+</section>
+<aside class="panel side">
+<div class="titleline"><h2>게임 진행</h2><span class="hint" id="stagecount">STEP 1 / 3</span></div>
+<div class="step" id="step">STEP 01 · FIRST PICK</div>
+<h3 id="instruction">어떤 문에 자동차가 있을까?</h3>
+<p id="detail">왼쪽 100개의 문 중 하나를 골라봐. 선택을 마치면 사회자가 염소 문 98개를 열어줄 거야.</p>
+<div id="result"></div>
+<div class="actions" id="actions"><button class="btn soft" disabled>먼저 문을 하나 선택해 봐</button></div>
+<details class="help"><summary>💡 왜 50:50이 아닐까? 설명 보기</summary><p>자동차 위치를 아는 사회자가 반드시 염소 문만 골라 열기 때문이야. 처음 선택이 틀렸을 확률 99%가, 사회자가 남긴 다른 문에 그대로 유지돼.</p></details>
+</aside>
+</div>
+<div class="sectiontitle"><h2>02. 컴퓨터 자동 실험</h2><span class="hint">당첨 확률이 정말 다른지 직접 확인해 봐</span></div>
+<div class="bottom">
+<section class="panel sim">
+<div class="titleline"><h2>선택 유지 vs 선택 변경</h2><span class="hint" id="simcount">누적 0회</span></div>
+<div class="simbuttons"><button class="btn outline" data-run="100">100회 실험</button><button class="btn outline" data-run="1000">1,000회 실험</button><button class="btn blue" data-run="10000">10,000회 실험</button></div>
+<div class="barlabel"><span>🟠 선택 유지</span><span id="staytext">—%</span></div><div class="track"><div class="fill" id="staybar"></div></div><div class="barfoot"><span>이론값 1%</span><span id="staywins">0회 당첨</span></div>
+<div class="barlabel"><span>🟢 선택 변경</span><span id="switchtext">—%</span></div><div class="track"><div class="fill switch" id="switchbar"></div></div><div class="barfoot"><span>이론값 99%</span><span id="switchwins">0회 당첨</span></div>
+<div style="margin-top:22px"><button class="btn soft" id="resetsim">자동 실험 기록 초기화</button></div>
+</section>
+<section class="panel summary"><h2>내 플레이 기록</h2><div class="numbers"><div class="number"><b id="rounds">0</b><span>플레이 횟수</span></div><div class="number"><b id="wins">0</b><span>자동차 당첨</span></div></div>
+<div class="row"><span>모든 판에서 유지했다면</span><b id="hypstay">0회 당첨</b></div>
+<div class="row"><span>모든 판에서 바꿨다면</span><b id="hypswitch">0회 당첨</b></div>
+<div style="margin-top:20px"><button class="btn soft" id="resetmanual">플레이 기록 초기화</button></div></section>
+</div>
+<details class="helpwide"><summary>📖 원리가 궁금할 때만 클릭해서 설명 보기</summary><div class="helpbody"><div><b>핵심은 처음에 틀렸을 확률이 99%라는 거야.</b><p>사회자는 정답을 알고 있기 때문에 자동차가 있는 문을 열지 않아. 네가 처음 틀렸다면(99%) 사회자가 남긴 다른 문이 무조건 자동차야. 따라서 바꾸면 99%로 당첨돼.</p><p>문 두 개가 같은 조건에서 무작위로 남은 것이 아니기 때문에 각각 50%가 되는 게 아니야. 만약 마지막에 자동차를 다시 무작위로 배치한다면 그때는 50:50이 맞아.</p></div><div class="maths">처음 선택 유지 성공: 1 / 100 = <strong>1%</strong><br>다른 문으로 변경 성공: 99 / 100 = <b>99%</b></div></div></details>
+<footer>몬티홀 100 · 게임은 이 브라우저에서만 진행되며 친구들의 기록과 공유되지 않아 · 사회자는 항상 염소 문 98개만 공개해</footer>
+</main>
+<script>
+(function(){
+"use strict";
+var grid=document.getElementById("doorgrid"), buttons=[], prize=0, pick=0, other=0, stage="pick", final=0;
+var manual={rounds:0,wins:0,stay:0,switch:0}, sim={rounds:0,stay:0,switch:0};
+var key="monty-100-sharing-v1";
+function $(id){return document.getElementById(id)}
+function rnd(n){return Math.floor(Math.random()*n)+1}
+function load(){try{var saved=JSON.parse(localStorage.getItem(key)||"{}");if(saved.manual&&Number.isInteger(saved.manual.rounds))manual=saved.manual;if(saved.sim&&Number.isInteger(saved.sim.rounds))sim=saved.sim}catch(e){}}
+function save(){try{localStorage.setItem(key,JSON.stringify({manual:manual,sim:sim}))}catch(e){}}
+for(var i=1;i<=100;i++){var b=document.createElement("button");b.type="button";b.className="door";b.textContent=i;b.setAttribute("aria-label",i+"번 문");(function(n){b.addEventListener("click",function(){select(n)})})(i);grid.appendChild(b);buttons.push(b)}
+function setActions(items){var area=$("actions");area.innerHTML="";items.forEach(function(it){var b=document.createElement("button");b.textContent=it[0];b.className="btn "+it[1];b.onclick=it[2];area.appendChild(b)})}
+function select(n){if(stage!=="pick")return;pick=n;stage="selected";other=0;render()}
+function reveal(){if(stage!=="selected")return;other=(pick===prize)?((pick+rnd(99)-1)%100)+1:prize;stage="offer";render()}
+function choose(change){if(stage!=="offer")return;final=change?other:pick;stage="done";manual.rounds++;manual.wins+=(final===prize?1:0);manual.stay+=(pick===prize?1:0);manual.switch+=(pick===prize?0:1);save();render()}
+function newRound(){prize=rnd(100);pick=0;other=0;final=0;stage="pick";render()}
+function render(){
+buttons.forEach(function(b,i){var n=i+1, opened=(stage==="offer"||stage==="done")&&n!==pick&&n!==other;b.className="door";b.disabled=stage!=="pick";b.textContent=n;
+if(opened){b.classList.add("opened");b.textContent="🐐";}else if(stage==="done"&&n===prize){b.classList.add("win");b.textContent="🚗";}else if(stage==="done"&&(n===pick||n===other)){b.classList.add("lose");b.textContent="🐐";}else if(n===pick){b.classList.add("chosen")}else if(n===other){b.classList.add("other")}
+});
+$("round").textContent=(manual.rounds+(stage==="done"?0:1))+"회차";
+$("result").innerHTML="";
+if(stage==="pick"){
+$("stagecount").textContent="STEP 1 / 3";$("step").textContent="STEP 01 · FIRST PICK";$("status").textContent="문 100개 중 하나를 클릭해 봐.";$("substatus").textContent="자동차는 100개 문 중 하나 뒤에 있어.";$("instruction").textContent="어떤 문에 자동차가 있을까?";$("detail").textContent="왼쪽의 문을 클릭하면 선택이 확정돼.";setActions([["먼저 문을 선택해 봐","soft",function(){}]]);$("actions").firstChild.disabled=true;
+}else if(stage==="selected"){
+$("stagecount").textContent="STEP 2 / 3";$("step").textContent="STEP 02 · HOST REVEAL";$("status").textContent=pick+"번 문을 골랐어!";$("substatus").textContent="사회자는 자동차의 위치를 알고 있어.";$("instruction").textContent="사회자가 염소 문 98개를 열어줄게.";$("detail").textContent="자동차가 있는 문은 절대로 열지 않고, 문 2개만 남겨.";setActions([["염소 문 98개 열기 →","blue",reveal],["처음부터 다시 고르기","soft",newRound]]);
+}else if(stage==="offer"){
+$("stagecount").textContent="STEP 3 / 3";$("step").textContent="STEP 03 · MAKE A CHOICE";$("status").textContent="염소 문 98개가 공개됐어!";$("substatus").textContent=pick+"번과 "+other+"번 문만 닫혀 있어.";$("instruction").textContent="처음 선택을 유지할까, 바꿀까?";$("detail").textContent="어느 쪽이 더 유리하다고 생각해? 마음대로 결정해 봐.";setActions([["처음 "+pick+"번 문 유지하기","outline",function(){choose(false)}],["다른 "+other+"번 문으로 바꾸기","green",function(){choose(true)}]]);
+}else{
+var win=final===prize;
+$("stagecount").textContent="RESULT";$("step").textContent="RESULT · GAME OVER";$("status").textContent=win?"🎉 자동차 당첨!":"🐐 아쉽게도 염소야!";$("substatus").textContent="자동차는 "+prize+"번 문 뒤에 있었어.";$("instruction").textContent=win?"이번 선택은 성공했어!":"이번 선택은 실패했어!";$("detail").textContent="처음 선택 "+pick+"번 · 최종 선택 "+final+"번";
+var r=document.createElement("div");r.className="result"+(win?"":" bad");r.innerHTML="<strong>"+(win?"🚗 자동차 당첨!":"🐐 꽝! 다음 판에 도전")+"</strong><span>정답 "+prize+"번 · 네 최종 선택 "+final+"번</span>";$("result").appendChild(r);
+setActions([["다음 게임 시작 →","blue",newRound]]);
+}
+$("rounds").textContent=manual.rounds.toLocaleString("ko-KR");$("wins").textContent=manual.wins.toLocaleString("ko-KR");$("hypstay").textContent=manual.stay+"회 당첨";$("hypswitch").textContent=manual.switch+"회 당첨";
+}
+function rendersim(){
+$("simcount").textContent="누적 "+sim.rounds.toLocaleString("ko-KR")+"회";
+var a=sim.rounds?100*sim.stay/sim.rounds:0,b=sim.rounds?100*sim.switch/sim.rounds:0;
+$("staytext").textContent=sim.rounds?a.toFixed(2)+"%":"—%";$("switchtext").textContent=sim.rounds?b.toFixed(2)+"%":"—%";
+$("staybar").style.width=a+"%";$("switchbar").style.width=b+"%";
+$("staywins").textContent=sim.stay.toLocaleString("ko-KR")+"회 당첨";$("switchwins").textContent=sim.switch.toLocaleString("ko-KR")+"회 당첨";
+}
+document.querySelectorAll("[data-run]").forEach(function(btn){btn.onclick=function(){var n=Number(btn.getAttribute("data-run"));for(var i=0;i<n;i++){var first=rnd(100),p=rnd(100);sim.rounds++;if(first===p)sim.stay++;else sim.switch++}save();rendersim()}});
+$("resetsim").onclick=function(){sim={rounds:0,stay:0,switch:0};save();rendersim()};
+$("resetmanual").onclick=function(){manual={rounds:0,wins:0,stay:0,switch:0};save();newRound()};
+load();newRound();rendersim();
+})();
+</script>
+</body>
+</html>
