@@ -135,3 +135,32 @@ figcaption, .caption { margin-top: var(--space-sm); font-size: var(--text-sm); c
 
 /* a head and its line */
 h2 + .lead { margin-top: var(--space-md); }
+
+/* demo videos */
+.phone video { display: block; width: 100%; height: auto; aspect-ratio: 390 / 844; object-fit: cover; background: var(--color-paper-2); outline: var(--rule-hair) solid var(--color-rule-2); outline-offset: -1px; }
+.wide video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; background: var(--color-paper-2); outline: var(--rule-hair) solid var(--color-rule-2); outline-offset: -1px; }
+video:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* try it yourself */
+h3 { font: 600 var(--text-title)/1.2 var(--font-display); letter-spacing: var(--tracking-display); color: var(--color-ink); margin-bottom: var(--space-sm); }
+.try { margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: var(--rule-bar) solid var(--color-ink); }
+.steps { margin: 0 0 var(--space-lg); padding-left: 1.4em; display: grid; gap: var(--space-sm); }
+.steps li { padding-left: var(--space-2xs); }
+.steps li::marker { font-family: var(--font-outlier); color: var(--color-accent-2); }
+.try-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); flex-wrap: wrap; }
+.qr { margin: 0; display: flex; align-items: center; gap: var(--space-sm); }
+.qr img { width: 96px; height: 96px; }
+.qr figcaption { margin: 0; }
+code { font-family: var(--font-outlier); font-size: 0.9em; }
+
+/* install */
+.install { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-3xl); margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: var(--rule-bar) solid var(--color-ink); align-items: start; }
+.install .facts { margin-bottom: var(--space-lg); }
+.install .note { margin-top: var(--space-md); margin-bottom: 0; }
+.install .steps { margin-top: var(--space-xl); }
+
+@media (max-width: 60rem) {
+  .install { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  .install .steps { margin-top: 0; }
+}
+@media (hover: none) { .qr { display: none; } }
