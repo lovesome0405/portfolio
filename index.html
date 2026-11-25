@@ -100,13 +100,25 @@
         </div>
         <div>
           <p class="prize">TRIPOTHON S1 SEOUL, Best Use of Tripo 수상</p>
-          <p class="caption">3인 팀 SAMHAP Games, 2026년 10월</p>
+          <p class="caption">3인 팀 SAMHAP Games, 2026.10</p>
         </div>
       </div>
-      <figure class="wide">
-          <video src="assets/video/villagen.mp4" poster="assets/video/villagen.jpg" width="960" height="600" controls muted playsinline preload="none" aria-label="Villagen 게임 화면 영상. 마을, 지도, 제작 의뢰, 텃밭, 낚시, 채집, 탐험 화면이 차례로 나온다"></video>
-          <figcaption>게임 화면 7장을 이어 붙인 16초 영상입니다. 마을, 지도, 제작 의뢰, 텃밭, 낚시, 채집, 탐험 순서입니다.</figcaption>
+      <div class="vg-media">
+        <figure class="vg-video">
+          <video src="assets/video/villagen.mp4" poster="assets/video/villagen.jpg" width="960" height="540" controls muted playsinline preload="none" aria-label="Villagen 플레이 영상. 카페 안에서 제작 의뢰 창에 만들 가구를 문장으로 적고, 제작 진행 표시가 끝나면 완성된 3D 가구를 방 안에 놓는다"></video>
+          <figcaption>실제 플레이 화면, 18초. 만들 가구를 문장으로 적으면 AI가 3D 모델을 만들고, 완성된 가구를 방에 놓습니다.</figcaption>
         </figure>
+        <div class="vg-photos">
+          <figure class="vg-photo">
+            <img src="assets/villagen-award.jpg" width="960" height="640" loading="lazy" alt="TRIPOTHON S1 시상식에서 SAMHAP Games 3명이 Best Use of Tripo 상금 400달러 보드를 들고 서 있다">
+            <figcaption>Best Use of Tripo 시상, 2026.10.16</figcaption>
+          </figure>
+          <figure class="vg-photo">
+            <img src="assets/villagen-group.jpg" width="960" height="640" loading="lazy" alt="TRIPOTHON S1 SEOUL 참가자와 운영진 단체 사진">
+            <figcaption>TRIPOTHON S1 SEOUL 참가자 단체 사진</figcaption>
+          </figure>
+        </div>
+      </div>
       <dl class="facts-row">
         <div><dt>내가 한 일</dt><dd>팀장. 게임 기획, 게임 안 코드와 문제 해결. 입력 문장에서 게임 기능 키워드와 이미지 키워드를 나눠 처리했습니다.</dd></div>
         <div><dt>구조</dt><dd>Godot 클라이언트, Python 서버, SQLite. LLM이 요청을 정리하고 Tripo가 3D 모델(GLB)을 만듭니다.</dd></div>
@@ -142,6 +154,7 @@
         <h2 id="naedon-title">내돈내편</h2>
         <p class="lead">스마트폰 금융이 어려운 고령층이 말로 금융 업무를 준비하고, 돈을 보내기 전에 한 번 더 확인하게 돕습니다.</p>
         <dl class="facts">
+          <div><dt>시기</dt><dd>2026.09</dd></div>
           <div><dt>내가 한 일</dt><dd>2인 팀의 팀장. 기획부터 개발, 배포까지 맡았습니다.</dd></div>
           <div><dt>설계</dt><dd>AI는 말의 의도와 위험 신호를 정리하고, 송금을 멈출지는 서버 규칙이 정합니다. 위험 신호 13종, 강제 보류 조건 6가지.</dd></div>
           <div><dt>기능</dt><dd>예금 상품 비교와 예상 이자, 음성 입력과 읽어 주기. API 키가 없어도 Mock 모드로 끝까지 시연됩니다.</dd></div>
@@ -205,6 +218,7 @@
         <h2 id="lolypoly-title">Lolypoly</h2>
         <p class="lead">학교 홈페이지에 흩어진 식단, 학사일정, 공지를 휴대폰 한 화면에서 봅니다.</p>
         <dl class="facts">
+          <div><dt>시기</dt><dd>2026.11</dd></div>
           <div><dt>내가 한 일</dt><dd>2인 팀의 팀장. 기획과 개발을 맡고, Codex로 구현하며 결정과 진행은 저장소 문서에 남깁니다.</dd></div>
           <div><dt>설계</dt><dd>공식 홈페이지를 Playwright로 정해진 시간에 수집해 DB에 저장하고, 화면은 DB만 읽습니다. 학생이 앱을 열 때마다 학교 사이트에 접속하지 않습니다.</dd></div>
           <div><dt>기능</dt><dd>식단, 학사일정, 공지, 의견 보내기, 홈 화면 설치(PWA), 출처와 함께 답하는 안내(<a href="#rag">공통 RAG 엔진</a>)</dd></div>
@@ -239,6 +253,7 @@
         <h2 id="maru-title">MARU</h2>
         <p class="lead">외국인 여행자에게 서울 전통문화의 맥락을 설명하고, 관심사와 시간에 맞는 코스를 추천합니다.</p>
         <dl class="facts">
+          <div><dt>시기</dt><dd>2026.06</dd></div>
           <div><dt>내가 한 일</dt><dd>팀장. 서비스 기획, 화면 설계, AI 해설 프롬프트, README</dd></div>
           <div><dt>기능</dt><dd>여행 조건 선택, 추천 코스 6개, 장소 29곳 해설, 지도 앱 길찾기, 4개 언어 전환, 챗봇 아리</dd></div>
           <div><dt>설계</dt><dd>문화 사실은 데이터에, 추천 점수는 서버에, 쉬운 해설은 AI에 맡겼습니다. AI 연결이 없으면 앱 데이터로 답합니다.</dd></div>
@@ -281,7 +296,7 @@
         </div>
         <div>
           <p class="prize">Lolypoly 식단 화면에서 운영 중</p>
-          <p class="caption">개인 프로젝트, 2026년 11월. 구현은 Claude Code로 하고 설계, 평가, 운영 적용을 맡았습니다.</p>
+          <p class="caption">개인 프로젝트, 2026.11. 구현은 Claude Code로 하고 설계, 평가, 운영 적용을 맡았습니다.</p>
         </div>
       </div>
 
@@ -346,7 +361,6 @@
     <div class="container">
       <div>
         <h2 id="contact-title">연락하기</h2>
-        <p class="lead">인턴, 공모전 팀, 프로젝트 이야기 모두 반갑습니다.</p>
       </div>
       <dl class="contact-lines">
         <div><dt>이메일</dt><dd><a href="mailto:lovesome0405@naver.com">lovesome0405@naver.com</a></dd></div>
@@ -356,10 +370,5 @@
   </section>
 </main>
 
-<footer class="colophon">
-  <div class="container">
-    <p>2026 유주상. 이 페이지의 화면은 모두 각 프로젝트의 실제 화면입니다. 팀 프로젝트의 저장소와 화면 저작권은 각 팀에 있습니다.</p>
-  </div>
-</footer>
 </body>
 </html>
