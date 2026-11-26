@@ -1,6 +1,6 @@
 /* 시안 A — 바닐라 JS. 외부 라이브러리 없음.
    1) 장이 바뀌면 배경 색조와 강조색을 바꾼다.
-   2) 캔버스 점들이 장마다 다른 형체(고리 → AI → 방패 → 큐브 → 휴대폰 → 지붕 → 흩어짐 → 열린 원)로 모인다.
+   2) 캔버스 점들이 장마다 다른 형체(고리 → AI → 지붕 → 방패 → 큐브 → 휴대폰 → 두 고리 → 열린 원)로 모인다.
    3) 내용은 화면에 들어올 때 나타난다. prefers-reduced-motion이면 2·3의 움직임을 끈다. */
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
@@ -10,17 +10,36 @@
   /* 장별 색: bg는 배경, accent는 강조 글자·점 색 (어두운 배경 대비 AA 이상) */
   const THEME = {
     top:      { bg: '#0b0b0d', accent: '#d9d4ff', shape: 'ring' },
-    prologue: { bg: '#0e0f14', accent: '#cbd5ea', shape: 'ai' },
+    about:    { bg: '#0e0f14', accent: '#cbd5ea', shape: 'ai' },
     naedon:   { bg: '#06201b', accent: '#7fe0c0', shape: 'shield' },
     villagen: { bg: '#170f2c', accent: '#c6adff', shape: 'cube' },
     lolypoly: { bg: '#091831', accent: '#94c6ff', shape: 'phone' },
     maru:     { bg: '#2b0f0c', accent: '#ffb48c', shape: 'roof' },
-    tally:    { bg: '#121212', accent: '#e8e2d0', shape: 'scatter' },
-    next:     { bg: '#0b0b0d', accent: '#f1efe9', shape: 'arc' },
+    rag:      { bg: '#22091c', accent: '#ff9ad5', shape: 'link' },
+    contact:  { bg: '#0b0b0d', accent: '#f1efe9', shape: 'arc' },
   };
 
   const chapters = [...document.querySelectorAll('[data-chapter]')];
-  const railLinks = [...document.querySelectorAll('.rail a')];
+  /* 장 번호와 목차는 HTML의 섹션 순서에서 만든다: 섹션을 옮기기만 하면 번호·목차가 따라온다 */
+  let chNo = 0;
+  chapters.forEach(sec => {
+    const tag = sec.querySelector('[data-chno]');
+    if (!tag) return;
+    chNo += 1;
+    const n = String(chNo).padStart(2, '0');
+    tag.textContent = 'CHAPTER ' + n;
+    sec.dataset.num = n;
+  });
+  const railList = document.getElementById('rail-list');
+  chapters.forEach(sec => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + sec.id; a.dataset.target = sec.dataset.chapter;
+    const dot = document.createElement('span'); dot.className = 'rail-dot';
+    const label = document.createElement('span'); label.className = 'rail-label'; label.textContent = sec.dataset.label;
+    a.append(dot, label); li.append(a); railList.append(li);
+  });
+  const railLinks = [...railList.querySelectorAll('a')];
   const nowNum = document.getElementById('now-num');
   const nowLabel = document.getElementById('now-label');
   const nowFill = document.getElementById('now-fill');
@@ -34,7 +53,7 @@
     root.style.setProperty('--accent', t.accent);
     railLinks.forEach(a => a.setAttribute('aria-current', a.dataset.target === id ? 'true' : 'false'));
     const el = document.getElementById(id);
-    if (el) { nowNum.textContent = el.dataset.num; nowLabel.textContent = el.dataset.label; }
+    if (el) { nowNum.textContent = el.dataset.num || '—'; nowLabel.textContent = el.dataset.label; }
     field.morph(t.shape, t.accent);
   }
 
@@ -65,6 +84,12 @@
         c.beginPath(); c.moveTo(40, 96); c.lineTo(180, 96); c.stroke();
         c.lineWidth = 9; [58, 92, 128, 162].forEach(x => { c.beginPath(); c.moveTo(x, 104); c.lineTo(x, 196); c.stroke(); });
         c.beginPath(); c.moveTo(30, 200); c.lineTo(190, 200); c.stroke(); },
+      link(c) { c.lineWidth = 8;
+        c.beginPath(); c.arc(56, 110, 40, 0, Math.PI*2); c.stroke();
+        c.beginPath(); c.arc(164, 110, 40, 0, Math.PI*2); c.stroke();
+        c.lineWidth = 6; [[96, 110, 124, 110], [86, 84, 134, 84], [86, 136, 134, 136]].forEach(([a, b, x, y]) => { c.beginPath(); c.moveTo(a, b); c.lineTo(x, y); c.stroke(); });
+        c.beginPath(); c.arc(110, 30, 14, 0, Math.PI*2); c.fill(); c.beginPath(); c.arc(110, 192, 14, 0, Math.PI*2); c.fill();
+        c.lineWidth = 5; c.beginPath(); c.moveTo(70, 74); c.lineTo(100, 40); c.moveTo(150, 74); c.lineTo(120, 40); c.moveTo(70, 146); c.lineTo(100, 182); c.moveTo(150, 146); c.lineTo(120, 182); c.stroke(); },
       arc(c) { c.lineWidth = 11; c.lineCap = 'round'; c.beginPath(); c.arc(S/2, S/2, 82, Math.PI * 0.62, Math.PI * 2.28); c.stroke();
         c.beginPath(); c.arc(S/2 - 82 * Math.cos(Math.PI*0.38) + 6, S/2 + 82 * Math.sin(Math.PI*0.38) + 14, 7, 0, Math.PI*2); c.fill(); },
     };
@@ -92,7 +117,7 @@
       const desktop = W >= 1024;
       return desktop
         ? { cx: W * 0.3, cy: H * 0.5, r: Math.min(W * 0.2, H * 0.34), alpha: 0.9 }
-        : { cx: W * 0.5, cy: H * 0.3, r: Math.min(W * 0.36, H * 0.2), alpha: 0.55 };
+        : { cx: W * 0.5, cy: H * 0.2, r: Math.min(W * 0.3, H * 0.15), alpha: 0.5 };
     }
 
     function resize() {
