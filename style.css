@@ -1,5 +1,5 @@
 /* Hallmark · shape: Index (swap from Conversational FAQ) · genre: editorial · theme: Almanac (deal 2/3, seed rpg-pwa-github-b64d·6b5fe3f6·2026-11-09·r0) · job: hire · draw: 173ac7
- * hero: Index · nav: edge-aligned (swap from search-led: four destinations, nothing to search) · footer: colophon block (swap from index columns: no sitemap) · imagery: the product (real captures of all four projects) · signature: the project ledger, name, role and result per row, strongest first
+ * hero: Index · nav: edge-aligned (swap from search-led: four destinations, nothing to search) · footer: none (the contact section closes the page) · imagery: the product (real captures of all four projects) · signature: the project ledger, name, role and result per row, strongest first
  * axes: mid/grotesk-sans/chromatic-magenta · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V4 · weakest: P, a name and a list argue little; each case leads with the problem and the decision the student made, per hiring-manager advice */
 @import url("./tokens.css");
@@ -106,8 +106,6 @@ figcaption, .caption { margin-top: var(--space-sm); font-size: var(--text-sm); c
 .contact-lines dt { font-size: var(--text-sm); color: var(--color-muted); padding-top: var(--space-2xs); }
 .contact-lines dd { margin: 0; font-size: var(--text-lead); }
 
-.colophon { padding-block: var(--space-2xl); border-top: var(--rule-hair) solid var(--color-rule); }
-.colophon p { font-size: var(--text-sm); color: var(--color-muted); max-width: 72ch; }
 
 /* reflow */
 @media (max-width: 60rem) {
@@ -164,3 +162,40 @@ code { font-family: var(--font-outlier); font-size: 0.9em; }
   .install .steps { margin-top: 0; }
 }
 @media (hover: none) { .qr { display: none; } }
+
+/* shared rag engine: the pipeline, status and captures */
+.flow { list-style: none; margin: var(--space-2xl) 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-md); counter-reset: flow; }
+.flow li { counter-increment: flow; display: grid; align-content: start; gap: var(--space-2xs); padding-top: var(--space-sm); border-top: var(--rule-bar) solid var(--color-ink); }
+.flow li::before { content: counter(flow, decimal-leading-zero); font-family: var(--font-outlier); font-size: var(--text-sm); color: var(--color-accent-2); }
+.flow b { font: 600 var(--text-md)/1.3 var(--font-display); color: var(--color-ink); }
+.flow span { font-size: var(--text-sm); line-height: 1.45; color: var(--color-muted); }
+.rag-body { align-items: start; }
+.status dt { font-family: var(--font-outlier); color: var(--color-ink); }
+.note--after { margin-top: var(--space-md); margin-bottom: 0; }
+.stage--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); align-items: start; place-items: start stretch; }
+.shot { margin: 0; }
+.shot img { display: block; width: 100%; height: auto; outline: var(--rule-hair) solid var(--color-rule-2); outline-offset: -1px; }
+
+@media (max-width: 60rem) {
+  .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-lg); }
+}
+@media (max-width: 30rem) {
+  .flow, .stage--pair { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* villagen: play clip beside the award photos */
+.vg-media { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); gap: var(--space-lg); margin-top: var(--space-2xl); align-items: start; }
+.vg-video { margin: 0; }
+.vg-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--color-paper-2); outline: var(--rule-hair) solid var(--color-rule-2); outline-offset: -1px; }
+.vg-photos { display: grid; gap: var(--space-md); }
+.vg-photo { margin: 0; }
+.vg-photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; outline: var(--rule-hair) solid var(--color-rule-2); outline-offset: -1px; }
+.vg-photo figcaption { margin-top: var(--space-xs); }
+
+@media (max-width: 60rem) {
+  .vg-media { grid-template-columns: minmax(0, 1fr); }
+  .vg-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 30rem) {
+  .vg-photos { grid-template-columns: minmax(0, 1fr); }
+}
