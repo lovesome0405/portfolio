@@ -4,197 +4,60 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>유주상 포트폴리오</title>
-<meta name="description" content="한국폴리텍대학 춘천캠퍼스 AI융합과 유주상의 포트폴리오. Villagen, 공통 RAG 엔진, 내돈내편, Lolypoly, MARU.">
+<meta name="description" content="한국폴리텍대학 춘천캠퍼스 AI융합과 유주상의 포트폴리오. MARU, 내돈내편, Villagen, Lolypoly, 공통 RAG 엔진.">
+<meta name="theme-color" content="#0b0b0d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 
-<header class="nav">
-  <div class="container">
-    <a class="wordmark" href="#top">유주상</a>
-    <nav aria-label="주요 메뉴">
-      <ul>
-        <li class="nav-hide"><a href="#work">프로젝트</a></li>
-        <li class="nav-hide"><a href="#about">소개</a></li>
-        <li><a class="nav-contact" href="#contact">연락하기</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<canvas class="field" id="field" aria-hidden="true"></canvas>
+
+<!-- 모바일: 지금 읽는 장을 알려 주는 상단 띠 -->
+<div class="now" aria-hidden="true">
+  <span class="now-num" id="now-num">—</span>
+  <span class="now-label" id="now-label">유주상</span>
+  <span class="now-bar"><span id="now-fill"></span></span>
+</div>
+
+<!-- 데스크톱: 오른쪽 점 목차. 섹션 순서에서 a.js가 만든다 -->
+<nav class="rail" aria-label="장 목차"><ol id="rail-list"></ol></nav>
 
 <main id="main">
-  <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="container">
-      <div class="hero-head">
-        <h1 id="hero-title">유주상</h1>
-        <div>
-          <p class="lead">한국폴리텍대학 AI융합과에서 데이터와 소프트웨어로 실제 문제를 푸는 서비스를 만듭니다.</p>
-          <div class="actions">
-            <a class="btn btn--primary" href="mailto:lovesome0405@naver.com">이메일 보내기</a>
-            <a class="btn" href="https://github.com/lovesome0405">GitHub</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="sheet" id="work">
-        <div class="sheet-top">
-          <h2>프로젝트</h2>
-          <p>2026년, 5건</p>
-        </div>
-        <table class="ledger">
-          <thead>
-            <tr><th scope="col">이름</th><th scope="col">무엇을</th><th scope="col">맡은 일</th><th scope="col">결과</th><th scope="col" class="num">시기</th></tr>
-          </thead>
-          <tbody>
-            <tr class="current">
-              <td class="name"><a href="#villagen">Villagen</a></td>
-              <td data-label="무엇을">글로 적으면 AI가 3D 가구를 만드는 마을 RPG</td>
-              <td data-label="맡은 일">팀장, 기획과 게임 안 코드, 3인 팀</td>
-              <td data-label="결과">TRIPOTHON S1 SEOUL 수상</td>
-              <td class="num" data-label="시기">2026.10</td>
-            </tr>
-            <tr>
-              <td class="name"><a href="#rag">공통 RAG 엔진</a></td>
-              <td data-label="무엇을">두 서비스가 함께 쓰는, 출처를 확인해 답하는 챗봇 엔진</td>
-              <td data-label="맡은 일">개인 프로젝트, 설계와 검증</td>
-              <td data-label="결과">Lolypoly 식단 화면에서 운영</td>
-              <td class="num" data-label="시기">2026.11</td>
-            </tr>
-            <tr>
-              <td class="name"><a href="#naedon">내돈내편</a></td>
-              <td data-label="무엇을">고령층 음성 금융 안내와 송금 전 피싱 재확인</td>
-              <td data-label="맡은 일">팀장, 기획과 개발</td>
-              <td data-label="결과">웹 공개 배포</td>
-              <td class="num" data-label="시기">2026.09</td>
-            </tr>
-            <tr>
-              <td class="name"><a href="#lolypoly">Lolypoly</a></td>
-              <td data-label="무엇을">폴리텍 춘천캠퍼스 학생용 생활정보 앱</td>
-              <td data-label="맡은 일">팀장, 기획과 개발, 2인 팀</td>
-              <td data-label="결과">프로토타입 공개, 교수 승인</td>
-              <td class="num" data-label="시기">2026.11</td>
-            </tr>
-            <tr>
-              <td class="name"><a href="#maru">MARU</a></td>
-              <td data-label="무엇을">외국인 여행자를 위한 서울 전통문화 코스 추천</td>
-              <td data-label="맡은 일">팀장, 기획, UI, AI 해설 프롬프트</td>
-              <td data-label="결과">웹 공개, 코스 6개와 장소 29곳</td>
-              <td class="num" data-label="시기">2026.06</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- 시작 -->
+  <section class="panel hero" id="top" data-chapter="top" data-label="유주상" aria-labelledby="hero-title">
+    <div class="panel-inner">
+      <h1 id="hero-title" class="reveal"><span class="hero-ko">유주상</span><span class="hero-en" lang="en">YU JUSANG</span></h1>
+      <p class="sub reveal">한국폴리텍대학 AI융합과에서 데이터와 소프트웨어로 실제 문제를 푸는 서비스를 만듭니다.</p>
+      <div class="cta reveal">
+        <a class="btn btn--solid" href="mailto:lovesome0405@naver.com">이메일 보내기</a>
+        <a class="btn" href="https://github.com/lovesome0405">GitHub</a>
       </div>
     </div>
+    <nav class="index reveal" id="work" aria-labelledby="work-title">
+      <p class="index-head"><span id="work-title">프로젝트</span><span>2026년, 5건</span></p>
+      <ol>
+        <li><a href="#maru"><span class="ix-date">2026.06</span><span class="ix-name" lang="en">MARU</span><span class="ix-what">외국인 여행자를 위한 서울 전통문화 코스 추천</span><span class="ix-note">팀장, 기획, UI, AI 해설 프롬프트 · 웹 공개, 코스 6개와 장소 29곳</span></a></li>
+        <li><a href="#naedon"><span class="ix-date">2026.09</span><span class="ix-name">내돈내편</span><span class="ix-what">고령층 음성 금융 안내와 송금 전 피싱 재확인</span><span class="ix-note">팀장, 기획과 개발 · 웹 공개 배포</span></a></li>
+        <li><a href="#villagen"><span class="ix-date">2026.10</span><span class="ix-name" lang="en">Villagen</span><span class="ix-what">글로 적으면 AI가 3D 가구를 만드는 마을 RPG</span><span class="ix-note">팀장, 기획과 게임 안 코드, 3인 팀 · TRIPOTHON S1 SEOUL 수상</span></a></li>
+        <li><a href="#lolypoly"><span class="ix-date">2026.11</span><span class="ix-name" lang="en">Lolypoly</span><span class="ix-what">폴리텍 춘천캠퍼스 학생용 생활정보 앱</span><span class="ix-note">팀장, 기획과 개발, 2인 팀 · 프로토타입 공개, 교수 승인</span></a></li>
+        <li><a href="#rag"><span class="ix-date">2026.11</span><span class="ix-name">공통 RAG 엔진</span><span class="ix-what">두 서비스가 함께 쓰는, 출처를 확인해 답하는 챗봇 엔진</span><span class="ix-note">개인 프로젝트, 설계와 검증 · Lolypoly 식단 화면에서 운영</span></a></li>
+      </ol>
+    </nav>
   </section>
 
-  <section class="section well" id="villagen" aria-labelledby="villagen-title">
-    <div class="container">
-      <div class="head-split">
-        <div>
-          <h2 id="villagen-title">Villagen</h2>
-          <p class="lead">원하는 물건을 글로 적으면 AI가 3D 가구로 만들어 주는 마을 RPG입니다.</p>
-        </div>
-        <div>
-          <p class="prize">TRIPOTHON S1 SEOUL, Best Use of Tripo 수상</p>
-          <p class="caption">3인 팀 SAMHAP Games, 2026.10</p>
-        </div>
-      </div>
-      <div class="vg-media">
-        <figure class="vg-video">
-          <video src="assets/video/villagen.mp4" poster="assets/video/villagen.jpg" width="960" height="540" controls muted playsinline preload="none" aria-label="Villagen 플레이 영상. 카페 안에서 제작 의뢰 창에 만들 가구를 문장으로 적고, 제작 진행 표시가 끝나면 완성된 3D 가구를 방 안에 놓는다"></video>
-          <figcaption>실제 플레이 화면, 18초. 만들 가구를 문장으로 적으면 AI가 3D 모델을 만들고, 완성된 가구를 방에 놓습니다.</figcaption>
-        </figure>
-        <div class="vg-photos">
-          <figure class="vg-photo">
-            <img src="assets/villagen-award.jpg" width="960" height="640" loading="lazy" alt="TRIPOTHON S1 시상식에서 SAMHAP Games 3명이 Best Use of Tripo 상금 400달러 보드를 들고 서 있다">
-            <figcaption>Best Use of Tripo 시상, 2026.10.16</figcaption>
-          </figure>
-          <figure class="vg-photo">
-            <img src="assets/villagen-group.jpg" width="960" height="640" loading="lazy" alt="TRIPOTHON S1 SEOUL 참가자와 운영진 단체 사진">
-            <figcaption>TRIPOTHON S1 SEOUL 참가자 단체 사진</figcaption>
-          </figure>
-        </div>
-      </div>
-      <dl class="facts-row">
-        <div><dt>내가 한 일</dt><dd>팀장. 게임 기획, 게임 안 코드와 문제 해결. 입력 문장에서 게임 기능 키워드와 이미지 키워드를 나눠 처리했습니다.</dd></div>
-        <div><dt>구조</dt><dd>Godot 클라이언트, Python 서버, SQLite. LLM이 요청을 정리하고 Tripo가 3D 모델(GLB)을 만듭니다.</dd></div>
-        <div><dt>링크</dt><dd><a href="https://github.com/NormalMan0228/tripo_s1">팀 저장소</a></dd></div>
-      </dl>
-      <div class="install">
-        <div>
-          <h3>설치해서 해보기</h3>
-          <dl class="facts">
-            <div><dt>필요한 것</dt><dd>Windows PC, 인터넷 연결</dd></div>
-            <div><dt>내려받기</dt><dd>설치 파일 1.03GB, 학교판 0.11.9.10</dd></div>
-            <div><dt>조작</dt><dd>이동 WASD, 달리기 Shift, 상호작용 E, 제작 C, 지도 Tab</dd></div>
-          </dl>
-          <div class="actions">
-            <a class="btn btn--primary" href="https://villagen-school-dl.s3.ap-northeast-2.amazonaws.com/school/index.html">게임 내려받기</a>
-          </div>
-          <p class="note">설치 없이 쓰려면 같은 페이지의 압축 파일(1.09GB)을 받아 풀고 <code>Villagen\Villagen.exe</code>를 실행합니다.</p>
-        </div>
-        <ol class="steps">
-          <li>내려받기 페이지에서 ‘설치 파일 받기’를 눌러 <code>Villagen_School_Setup.exe</code>를 받습니다.</li>
-          <li>파일을 실행하고 설치 위치를 고르면 바탕화면에 Villagen 아이콘이 생깁니다.</li>
-          <li>처음 실행할 때 Windows ‘PC 보호’ 창이 뜨면 추가 정보, 실행 순서로 누릅니다.</li>
-          <li>로그인 화면의 학교 월드에서 아이디와 비밀번호로 계정을 만듭니다.</li>
-          <li>마을에서 C를 누르고 만들고 싶은 물건을 문장으로 적습니다. 예: 작은 버섯 모양 의자. 완성되면 가방에서 꺼내 원하는 곳에 놓습니다.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <section class="section case" id="naedon" aria-labelledby="naedon-title">
-    <div class="container split">
-      <div>
-        <h2 id="naedon-title">내돈내편</h2>
-        <p class="lead">스마트폰 금융이 어려운 고령층이 말로 금융 업무를 준비하고, 돈을 보내기 전에 한 번 더 확인하게 돕습니다.</p>
-        <dl class="facts">
-          <div><dt>시기</dt><dd>2026.09</dd></div>
-          <div><dt>내가 한 일</dt><dd>2인 팀의 팀장. 기획부터 개발, 배포까지 맡았습니다.</dd></div>
-          <div><dt>설계</dt><dd>AI는 말의 의도와 위험 신호를 정리하고, 송금을 멈출지는 서버 규칙이 정합니다. 위험 신호 13종, 강제 보류 조건 6가지.</dd></div>
-          <div><dt>기능</dt><dd>예금 상품 비교와 예상 이자, 음성 입력과 읽어 주기. API 키가 없어도 Mock 모드로 끝까지 시연됩니다.</dd></div>
-          <div><dt>기술</dt><dd>Next.js, TypeScript, OpenAI API, Vercel</dd></div>
-        </dl>
-        <p class="note">2026 금융 AI Challenge 출품작. 모든 계좌와 거래는 시연용 가상 데이터입니다.</p>
-        <div class="try">
-          <h3>직접 해보기</h3>
-          <ol class="steps">
-            <li>‘송금이 안전한지 볼래요’를 누릅니다. 예시 상황이 먼저 분석됩니다.</li>
-            <li>입력칸에 직접 적어 봅니다. 예: 아들이 폰이 고장났다며 문화상품권 50만 원어치 사서 보내달래요</li>
-            <li>송금 보류 화면과 위험 이유를 확인합니다. 예금 비교는 ‘2천만 원을 1년 맡기고 싶어’로 해 볼 수 있습니다.</li>
-          </ol>
-          <div class="try-row">
-            <div class="actions">
-              <a class="btn btn--primary" href="https://naedonnaepyeon.vercel.app">사이트에서 해보기</a>
-            </div>
-            <figure class="qr">
-              <img src="assets/qr-naedon.png" width="120" height="120" alt="내돈내편 사이트 주소 QR 코드">
-              <figcaption>휴대폰으로 열기</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <div class="stage">
-        <figure class="phone">
-          <video src="assets/video/naedon.mp4" poster="assets/video/naedon.jpg" width="390" height="844" controls muted playsinline preload="none" aria-label="내돈내편 시연 영상. 자녀를 사칭한 송금 요청을 입력하자 송금을 잠시 멈추는 화면이 나온다"></video>
-          <figcaption>시연 영상, 21초. 자녀 사칭 문자를 적자 송금을 멈춥니다.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <section class="section well" id="about" aria-labelledby="about-title">
-    <div class="container about">
-      <div>
-        <h2 id="about-title">소개</h2>
-        <p class="lead">한국폴리텍대학 춘천캠퍼스 AI융합과 1학년입니다. 데이터와 소프트웨어가 어떻게 돌아가는지 이해하고, 그걸로 실제 문제를 푸는 사람이 되려고 합니다. 이번 겨울방학에 AI와 데이터로 자료 관리와 업무를 개선하는 인턴 자리를 찾고 있습니다.</p>
-      </div>
-      <dl class="tool-rows">
+  <!-- 소개 -->
+  <section class="panel about" id="about" data-chapter="about" data-label="2026.03 소개" aria-labelledby="about-title">
+    <div class="panel-inner">
+      <p class="kicker reveal"><span class="mono">ABOUT</span> · <time datetime="2026-03">2026.03</time> 입학</p>
+      <h2 id="about-title" class="reveal">소개</h2>
+      <p class="sub reveal">한국폴리텍대학 춘천캠퍼스 AI융합과 1학년입니다. 데이터와 소프트웨어가 어떻게 돌아가는지 이해하고, 그걸로 실제 문제를 푸는 사람이 되려고 합니다. 이번 겨울방학에 AI와 데이터로 자료 관리와 업무를 개선하는 인턴 자리를 찾고 있습니다.</p>
+      <dl class="tools reveal">
         <div><dt>Python, Django</dt><dd>Lolypoly, 당근마켓 클론(실시간 채팅)</dd></div>
         <div><dt>FastAPI, PostgreSQL, pgvector</dt><dd>공통 RAG 엔진</dd></div>
         <div><dt>Next.js, TypeScript</dt><dd>내돈내편</dd></div>
@@ -206,111 +69,224 @@
     </div>
   </section>
 
-  <section class="section case" id="lolypoly" aria-labelledby="lolypoly-title">
-    <div class="container split split--flip">
-      <div class="stage">
-        <figure class="phone">
-          <video src="assets/video/lolypoly.mp4" poster="assets/video/lolypoly.jpg" width="390" height="844" controls muted playsinline preload="none" aria-label="Lolypoly 시연 영상. 홈, 식단, 학사일정, 공지 화면을 차례로 본다"></video>
-          <figcaption>시연 영상, 21초. 홈, 식단, 학사일정, 공지 순서입니다.</figcaption>
-        </figure>
-      </div>
-      <div>
-        <h2 id="lolypoly-title">Lolypoly</h2>
-        <p class="lead">학교 홈페이지에 흩어진 식단, 학사일정, 공지를 휴대폰 한 화면에서 봅니다.</p>
-        <dl class="facts">
-          <div><dt>시기</dt><dd>2026.11</dd></div>
-          <div><dt>내가 한 일</dt><dd>2인 팀의 팀장. 기획과 개발을 맡고, Codex로 구현하며 결정과 진행은 저장소 문서에 남깁니다.</dd></div>
-          <div><dt>설계</dt><dd>공식 홈페이지를 Playwright로 정해진 시간에 수집해 DB에 저장하고, 화면은 DB만 읽습니다. 학생이 앱을 열 때마다 학교 사이트에 접속하지 않습니다.</dd></div>
-          <div><dt>기능</dt><dd>식단, 학사일정, 공지, 의견 보내기, 홈 화면 설치(PWA), 출처와 함께 답하는 안내(<a href="#rag">공통 RAG 엔진</a>)</dd></div>
-          <div><dt>기술</dt><dd>Django, Playwright, SQLite, Docker, Render</dd></div>
-        </dl>
-        <p class="note">프로토타입과 기획서를 교수님께 승인받았고, 학생 20~30명 시험 사용을 준비하고 있습니다.</p>
-        <div class="try">
-          <h3>직접 해보기</h3>
-          <ol class="steps">
-            <li>휴대폰으로 엽니다. 로그인 없이 오늘 식단과 가까운 학사일정이 바로 보입니다.</li>
-            <li>아래 탭에서 식단, 학사일정을 눌러 이번 주 메뉴와 이번 달 일정을 봅니다.</li>
-            <li>브라우저 메뉴의 ‘홈 화면에 추가’를 누르면 앱처럼 설치됩니다.</li>
-          </ol>
-          <div class="try-row">
-            <div class="actions">
-              <a class="btn btn--primary" href="https://lolypoly.lolypoly.workers.dev/">사이트에서 해보기</a>
-            <a class="btn" href="https://github.com/chanmini584-ux/LOLYPOLY">저장소</a>
-            </div>
-            <figure class="qr">
-              <img src="assets/qr-lolypoly.png" width="120" height="120" alt="Lolypoly 사이트 주소 QR 코드">
-              <figcaption>휴대폰으로 열기</figcaption>
-            </figure>
-          </div>
-        </div>
+  <!-- 1장 MARU -->
+  <section class="chapter" id="maru" data-chapter="maru" data-label="2026.06 MARU" aria-labelledby="maru-title">
+    <div class="panel">
+      <div class="panel-inner">
+        <p class="kicker reveal"><span class="mono" data-chno>CHAPTER</span> · <time datetime="2026-06">2026.06</time></p>
+        <h2 id="maru-title" class="reveal" lang="en">MARU</h2>
+        <p class="sub reveal">외국인 여행자에게 서울 전통문화의 맥락을 설명하고, 관심사와 시간에 맞는 코스를 추천합니다.</p>
+        <ul class="lines reveal">
+          <li>팀장, 기획, UI, AI 해설 프롬프트</li>
+          <li>웹 공개, 코스 6개와 장소 29곳</li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <section class="section well case" id="maru" aria-labelledby="maru-title">
-    <div class="container split split--even">
-      <div>
-        <h2 id="maru-title">MARU</h2>
-        <p class="lead">외국인 여행자에게 서울 전통문화의 맥락을 설명하고, 관심사와 시간에 맞는 코스를 추천합니다.</p>
-        <dl class="facts">
-          <div><dt>시기</dt><dd>2026.06</dd></div>
-          <div><dt>내가 한 일</dt><dd>팀장. 서비스 기획, 화면 설계, AI 해설 프롬프트, README</dd></div>
-          <div><dt>기능</dt><dd>여행 조건 선택, 추천 코스 6개, 장소 29곳 해설, 지도 앱 길찾기, 4개 언어 전환, 챗봇 아리</dd></div>
-          <div><dt>설계</dt><dd>문화 사실은 데이터에, 추천 점수는 서버에, 쉬운 해설은 AI에 맡겼습니다. AI 연결이 없으면 앱 데이터로 답합니다.</dd></div>
-          <div><dt>기술</dt><dd>HTML, CSS, JavaScript, JSON, GitHub Pages, Spring Boot</dd></div>
-        </dl>
-        <div class="try">
-          <h3>직접 해보기</h3>
-          <ol class="steps">
-            <li>시작하기를 누르고 지역과 시간, 관심사, 동행, 예산을 차례로 고릅니다.</li>
-            <li>마지막 칸에 원하는 조건을 적습니다. 예: 사진 찍기 좋은 곳이면 좋겠어요</li>
-            <li>추천 코스 보기를 누르고, 코스를 열어 추천 이유와 지도 길찾기를 확인합니다. 오른쪽 아래 아리에게 질문해도 됩니다.</li>
-          </ol>
-          <div class="try-row">
-            <div class="actions">
-              <a class="btn btn--primary" href="https://lovesome0405.github.io/ari/">사이트에서 해보기</a>
-            <a class="btn" href="https://github.com/lovesome0405/ari">저장소</a>
-            </div>
-            <figure class="qr">
-              <img src="assets/qr-maru.png" width="120" height="120" alt="MARU 사이트 주소 QR 코드">
-              <figcaption>휴대폰으로 열기</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <div class="stage">
-        <figure class="phone">
+    <div class="detail">
+      <div class="detail-inner">
+        <figure class="media media--phone reveal">
           <video src="assets/video/maru.mp4" poster="assets/video/maru.jpg" width="390" height="844" controls muted playsinline preload="none" aria-label="MARU 시연 영상. 조건을 고르고 추천 코스와 코스 상세를 본다"></video>
           <figcaption>시연 영상, 25초. 조건을 고르면 코스를 추천하고 상세를 보여 줍니다.</figcaption>
         </figure>
+        <div class="body reveal">
+          <dl class="facts">
+            <div><dt>내가 한 일</dt><dd>팀장. 서비스 기획, 화면 설계, AI 해설 프롬프트, README</dd></div>
+            <div><dt>기능</dt><dd>여행 조건 선택, 추천 코스 6개, 장소 29곳 해설, 지도 앱 길찾기, 4개 언어 전환, 챗봇 아리</dd></div>
+            <div><dt>설계</dt><dd>문화 사실은 데이터에, 추천 점수는 서버에, 쉬운 해설은 AI에 맡겼습니다. AI 연결이 없으면 앱 데이터로 답합니다.</dd></div>
+            <div><dt>기술</dt><dd>HTML, CSS, JavaScript, JSON, GitHub Pages, Spring Boot</dd></div>
+          </dl>
+          <details class="try">
+            <summary>직접 해보기</summary>
+            <ol>
+              <li>시작하기를 누르고 지역과 시간, 관심사, 동행, 예산을 차례로 고릅니다.</li>
+              <li>마지막 칸에 원하는 조건을 적습니다. 예: 사진 찍기 좋은 곳이면 좋겠어요</li>
+              <li>추천 코스 보기를 누르고, 코스를 열어 추천 이유와 지도 길찾기를 확인합니다. 오른쪽 아래 아리에게 질문해도 됩니다.</li>
+            </ol>
+          </details>
+          <div class="cta">
+            <a class="btn btn--solid" href="https://lovesome0405.github.io/ari/">사이트에서 해보기</a>
+            <a class="btn" href="https://github.com/lovesome0405/ari">저장소</a>
+            <figure class="qr"><img src="assets/qr-maru.png" width="88" height="88" alt="MARU 사이트 주소 QR 코드"><figcaption>휴대폰으로 열기</figcaption></figure>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section case" id="rag" aria-labelledby="rag-title">
-    <div class="container">
-      <div class="head-split">
-        <div>
-          <h2 id="rag-title">공통 RAG 엔진</h2>
-          <p class="lead">학교 생활정보(Lolypoly)와 전통문화 안내(MARU), 성격이 다른 두 서비스의 챗봇이 같은 검색·근거 확인 엔진을 씁니다. 근거가 없으면 지어내지 않고 확인할 곳을 알려 줍니다.</p>
-        </div>
-        <div>
-          <p class="prize">Lolypoly 식단 화면에서 운영 중</p>
-          <p class="caption">개인 프로젝트, 2026.11. 구현은 Claude Code로 하고 설계, 평가, 운영 적용을 맡았습니다.</p>
+  <!-- 2장 내돈내편 -->
+  <section class="chapter" id="naedon" data-chapter="naedon" data-label="2026.09 내돈내편" aria-labelledby="naedon-title">
+    <div class="panel">
+      <div class="panel-inner">
+        <p class="kicker reveal"><span class="mono" data-chno>CHAPTER</span> · <time datetime="2026-09">2026.09</time></p>
+        <h2 id="naedon-title" class="reveal">내돈내편</h2>
+        <p class="sub reveal">스마트폰 금융이 어려운 고령층이 말로 금융 업무를 준비하고, 돈을 보내기 전에 한 번 더 확인하게 돕습니다.</p>
+        <ul class="lines reveal">
+          <li>팀장, 기획과 개발 · 웹 공개 배포</li>
+          <li>2026 금융 AI Challenge 출품작</li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail">
+      <div class="detail-inner">
+        <figure class="media media--phone reveal">
+          <video src="assets/video/naedon.mp4" poster="assets/video/naedon.jpg" width="390" height="844" controls muted playsinline preload="none" aria-label="내돈내편 시연 영상. 자녀를 사칭한 송금 요청을 입력하자 송금을 잠시 멈추는 화면이 나온다"></video>
+          <figcaption>시연 영상, 21초. 자녀 사칭 문자를 적자 송금을 멈춥니다.</figcaption>
+        </figure>
+        <div class="body reveal">
+          <dl class="facts">
+            <div><dt>내가 한 일</dt><dd>2인 팀의 팀장. 기획부터 개발, 배포까지 맡았습니다.</dd></div>
+            <div><dt>설계</dt><dd>AI는 말의 의도와 위험 신호를 정리하고, 송금을 멈출지는 서버 규칙이 정합니다. 위험 신호 13종, 강제 보류 조건 6가지.</dd></div>
+            <div><dt>기능</dt><dd>예금 상품 비교와 예상 이자, 음성 입력과 읽어 주기. API 키가 없어도 Mock 모드로 끝까지 시연됩니다.</dd></div>
+            <div><dt>기술</dt><dd>Next.js, TypeScript, OpenAI API, Vercel</dd></div>
+          </dl>
+          <p class="note">모든 계좌와 거래는 시연용 가상 데이터입니다.</p>
+          <details class="try">
+            <summary>직접 해보기</summary>
+            <ol>
+              <li>‘송금이 안전한지 볼래요’를 누릅니다. 예시 상황이 먼저 분석됩니다.</li>
+              <li>입력칸에 직접 적어 봅니다. 예: 아들이 폰이 고장났다며 문화상품권 50만 원어치 사서 보내달래요</li>
+              <li>송금 보류 화면과 위험 이유를 확인합니다. 예금 비교는 ‘2천만 원을 1년 맡기고 싶어’로 해 볼 수 있습니다.</li>
+            </ol>
+          </details>
+          <div class="cta">
+            <a class="btn btn--solid" href="https://naedonnaepyeon.vercel.app">사이트에서 해보기</a>
+            <figure class="qr"><img src="assets/qr-naedon.png" width="88" height="88" alt="내돈내편 사이트 주소 QR 코드"><figcaption>휴대폰으로 열기</figcaption></figure>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <ol class="flow" aria-label="질문을 처리하는 순서">
-        <li><b>질문과 화면 맥락</b><span>보고 있는 식단 날짜, 고른 장소</span></li>
-        <li><b>서비스별 규칙</b><span>어댑터가 자료 범위와 조회 방식을 정합니다</span></li>
-        <li><b>표 조회 또는 문서 검색</b><span>식단·장학표는 AI 없이 DB에서, 문서는 키워드와 의미 검색을 합쳐서</span></li>
-        <li><b>필요할 때만 AI 작성</b><span>고른 근거 4조각만 넘깁니다</span></li>
-        <li><b>서버가 다시 확인</b><span>인용 원문, 날짜, 숫자, 공지 적용 기간</span></li>
-        <li><b>답과 출처</b><span>근거가 부족하면 공식 확인 경로를 안내합니다</span></li>
-      </ol>
+  <!-- 3장 Villagen -->
+  <section class="chapter" id="villagen" data-chapter="villagen" data-label="2026.10 Villagen" aria-labelledby="villagen-title">
+    <div class="panel">
+      <div class="panel-inner">
+        <p class="kicker reveal"><span class="mono" data-chno>CHAPTER</span> · <time datetime="2026-10">2026.10</time></p>
+        <h2 id="villagen-title" class="reveal" lang="en">VILLAGEN</h2>
+        <p class="sub reveal">원하는 물건을 글로 적으면 AI가 3D 가구로 만들어 주는 마을 RPG입니다.</p>
+        <ul class="lines reveal">
+          <li><strong>TRIPOTHON S1 SEOUL, Best Use of Tripo 수상</strong></li>
+          <li>3인 팀 SAMHAP Games, 2026.10</li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail">
+      <div class="detail-inner detail-inner--wide">
+        <div class="media-stack reveal">
+          <figure class="media media--wide">
+            <video src="assets/video/villagen.mp4" poster="assets/video/villagen.jpg" width="960" height="540" controls muted playsinline preload="none" aria-label="Villagen 플레이 영상. 카페 안에서 제작 의뢰 창에 만들 가구를 문장으로 적고, 제작 진행 표시가 끝나면 완성된 3D 가구를 방 안에 놓는다"></video>
+            <figcaption>실제 플레이 화면, 18초. 만들 가구를 문장으로 적으면 AI가 3D 모델을 만들고, 완성된 가구를 방에 놓습니다.</figcaption>
+          </figure>
+          <div class="photo-pair">
+            <figure><img src="assets/villagen-award.jpg" width="960" height="640" loading="lazy" alt="TRIPOTHON S1 시상식에서 SAMHAP Games 3명이 Best Use of Tripo 상금 400달러 보드를 들고 서 있다"><figcaption>Best Use of Tripo 시상, 2026.10.16</figcaption></figure>
+            <figure><img src="assets/villagen-group.jpg" width="960" height="640" loading="lazy" alt="TRIPOTHON S1 SEOUL 참가자와 운영진 단체 사진"><figcaption>TRIPOTHON S1 SEOUL 참가자 단체 사진</figcaption></figure>
+          </div>
+        </div>
+        <div class="body reveal">
+          <dl class="facts">
+            <div><dt>내가 한 일</dt><dd>팀장. 게임 기획, 게임 안 코드와 문제 해결. 입력 문장에서 게임 기능 키워드와 이미지 키워드를 나눠 처리했습니다.</dd></div>
+            <div><dt>구조</dt><dd>Godot 클라이언트, Python 서버, SQLite. LLM이 요청을 정리하고 Tripo가 3D 모델(GLB)을 만듭니다.</dd></div>
+          </dl>
+          <details class="try">
+            <summary>설치해서 해보기</summary>
+            <dl class="facts facts--small">
+              <div><dt>필요한 것</dt><dd>Windows PC, 인터넷 연결</dd></div>
+              <div><dt>내려받기</dt><dd>설치 파일 1.03GB, 학교판 0.11.9.10</dd></div>
+              <div><dt>조작</dt><dd>이동 WASD, 달리기 Shift, 상호작용 E, 제작 C, 지도 Tab</dd></div>
+            </dl>
+            <ol>
+              <li>내려받기 페이지에서 ‘설치 파일 받기’를 눌러 <code>Villagen_School_Setup.exe</code>를 받습니다.</li>
+              <li>파일을 실행하고 설치 위치를 고르면 바탕화면에 Villagen 아이콘이 생깁니다.</li>
+              <li>처음 실행할 때 Windows ‘PC 보호’ 창이 뜨면 추가 정보, 실행 순서로 누릅니다.</li>
+              <li>로그인 화면의 학교 월드에서 아이디와 비밀번호로 계정을 만듭니다.</li>
+              <li>마을에서 C를 누르고 만들고 싶은 물건을 문장으로 적습니다. 예: 작은 버섯 모양 의자. 완성되면 가방에서 꺼내 원하는 곳에 놓습니다.</li>
+            </ol>
+            <p class="note">설치 없이 쓰려면 같은 페이지의 압축 파일(1.09GB)을 받아 풀고 <code>Villagen\Villagen.exe</code>를 실행합니다.</p>
+          </details>
+          <div class="cta">
+            <a class="btn btn--solid" href="https://villagen-school-dl.s3.ap-northeast-2.amazonaws.com/school/index.html">게임 내려받기</a>
+            <a class="btn" href="https://github.com/NormalMan0228/tripo_s1">팀 저장소</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <div class="split split--even rag-body">
-        <div>
+  <!-- 4장 Lolypoly -->
+  <section class="chapter" id="lolypoly" data-chapter="lolypoly" data-label="2026.11 Lolypoly" aria-labelledby="lolypoly-title">
+    <div class="panel">
+      <div class="panel-inner">
+        <p class="kicker reveal"><span class="mono" data-chno>CHAPTER</span> · <time datetime="2026-11">2026.11</time></p>
+        <h2 id="lolypoly-title" class="reveal" lang="en">LOLYPOLY</h2>
+        <p class="sub reveal">학교 홈페이지에 흩어진 식단, 학사일정, 공지를 휴대폰 한 화면에서 봅니다.</p>
+        <ul class="lines reveal">
+          <li>팀장, 기획과 개발, 2인 팀</li>
+          <li>프로토타입 공개, 교수 승인</li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail">
+      <div class="detail-inner">
+        <figure class="media media--phone reveal">
+          <video src="assets/video/lolypoly.mp4" poster="assets/video/lolypoly.jpg" width="390" height="844" controls muted playsinline preload="none" aria-label="Lolypoly 시연 영상. 홈, 식단, 학사일정, 공지 화면을 차례로 본다"></video>
+          <figcaption>시연 영상, 21초. 홈, 식단, 학사일정, 공지 순서입니다.</figcaption>
+        </figure>
+        <div class="body reveal">
+          <dl class="facts">
+            <div><dt>내가 한 일</dt><dd>2인 팀의 팀장. 기획과 개발을 맡고, Codex로 구현하며 결정과 진행은 저장소 문서에 남깁니다.</dd></div>
+            <div><dt>설계</dt><dd>공식 홈페이지를 Playwright로 정해진 시간에 수집해 DB에 저장하고, 화면은 DB만 읽습니다. 학생이 앱을 열 때마다 학교 사이트에 접속하지 않습니다.</dd></div>
+            <div><dt>기능</dt><dd>식단, 학사일정, 공지, 의견 보내기, 홈 화면 설치(PWA), 출처와 함께 답하는 안내(<a href="#rag">공통 RAG 엔진</a>)</dd></div>
+            <div><dt>기술</dt><dd>Django, Playwright, SQLite, Docker, Render</dd></div>
+          </dl>
+          <p class="note">프로토타입과 기획서를 교수님께 승인받았고, 학생 20~30명 시험 사용을 준비하고 있습니다.</p>
+          <details class="try">
+            <summary>직접 해보기</summary>
+            <ol>
+              <li>휴대폰으로 엽니다. 로그인 없이 오늘 식단과 가까운 학사일정이 바로 보입니다.</li>
+              <li>아래 탭에서 식단, 학사일정을 눌러 이번 주 메뉴와 이번 달 일정을 봅니다.</li>
+              <li>브라우저 메뉴의 ‘홈 화면에 추가’를 누르면 앱처럼 설치됩니다.</li>
+            </ol>
+          </details>
+          <div class="cta">
+            <a class="btn btn--solid" href="https://lolypoly.lolypoly.workers.dev/">사이트에서 해보기</a>
+            <a class="btn" href="https://github.com/chanmini584-ux/LOLYPOLY">저장소</a>
+            <figure class="qr"><img src="assets/qr-lolypoly.png" width="88" height="88" alt="Lolypoly 사이트 주소 QR 코드"><figcaption>휴대폰으로 열기</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5장 공통 RAG 엔진 -->
+  <section class="chapter" id="rag" data-chapter="rag" data-label="2026.11 공통 RAG 엔진" aria-labelledby="rag-title">
+    <div class="panel">
+      <div class="panel-inner">
+        <p class="kicker reveal"><span class="mono" data-chno>CHAPTER</span> · <time datetime="2026-11">2026.11</time></p>
+        <h2 id="rag-title" class="reveal">공통 RAG 엔진</h2>
+        <p class="sub reveal">학교 생활정보(Lolypoly)와 전통문화 안내(MARU), 성격이 다른 두 서비스의 챗봇이 같은 검색·근거 확인 엔진을 씁니다. 근거가 없으면 지어내지 않고 확인할 곳을 알려 줍니다.</p>
+        <ul class="lines reveal">
+          <li><strong>Lolypoly 식단 화면에서 운영 중</strong></li>
+          <li>개인 프로젝트, 2026.11. 구현은 Claude Code로 하고 설계, 평가, 운영 적용을 맡았습니다.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="detail">
+      <div class="detail-flow">
+        <ol class="flow reveal" aria-label="질문을 처리하는 순서">
+          <li><b>질문과 화면 맥락</b><span>보고 있는 식단 날짜, 고른 장소</span></li>
+          <li><b>서비스별 규칙</b><span>어댑터가 자료 범위와 조회 방식을 정합니다</span></li>
+          <li><b>표 조회 또는 문서 검색</b><span>식단·장학표는 AI 없이 DB에서, 문서는 키워드와 의미 검색을 합쳐서</span></li>
+          <li><b>필요할 때만 AI 작성</b><span>고른 근거 4조각만 넘깁니다</span></li>
+          <li><b>서버가 다시 확인</b><span>인용 원문, 날짜, 숫자, 공지 적용 기간</span></li>
+          <li><b>답과 출처</b><span>근거가 부족하면 공식 확인 경로를 안내합니다</span></li>
+        </ol>
+      </div>
+      <div class="detail-inner detail-inner--pair">
+        <div class="shot-pair reveal">
+          <figure><img src="assets/rag-lolypoly-live.jpg" width="716" height="954" loading="lazy" alt="롤리폴리 안내 화면. 성적우수장학금은 신입생도 1학기에 받을 수 있냐는 질문에 아니요, 신입생은 2학기부터 적용된다고 답하고 학교 장학제도 표의 해당 행을 출처로 보여 준다"><figcaption>운영 화면, 2026-11-24. 장학 질문에 학교 장학표의 해당 행을 출처로 답합니다.</figcaption></figure>
+          <figure><img src="assets/rag-maru-local.jpg" width="716" height="926" loading="lazy" alt="MARU 아리 패널. 경복궁 근정전 월대에 지금 올라갈 수 있냐는 질문에 2026-09-02부터 10-31까지 출입이 제한되어 기준 날짜에는 올라갈 수 없다고 영어로 답하고 궁능유적본부 공지를 출처로 보여 준다"><figcaption>MARU 로컬 연동, 2026-11-20. 기간이 정해진 공지를 기준 날짜와 비교해 답합니다.</figcaption></figure>
+        </div>
+        <div class="body reveal">
           <dl class="facts">
             <div><dt>내가 한 일</dt><dd>공통 엔진과 서비스별 어댑터로 나누는 구조, 답하지 않을 기준(근거 부족, 기간이 지난 공지), 상업 이용이 가능한 모델과 10초 이내 응답 목표, 학교 PC 운영을 정했습니다. 구현과 테스트 초안은 Claude Code로 만들고, 평가에서 나온 틀린 답을 보고 규칙을 고쳤습니다.</dd></div>
             <div><dt>자동화</dt><dd>학교 PC가 매일 공식 홈페이지 자료를 다시 모아 DB와 검색 색인을 갱신하고, 자주 묻는 질문의 답을 미리 만듭니다. 미리 만든 답은 사람이 맞다고 확인한 것만 화면에 나갑니다.</dd></div>
@@ -318,51 +294,35 @@
             <div><dt>한계</dt><dd>인용이 뜻까지 맞는지는 사람이 검토해야 합니다. 엔진이 학교 PC에 있어서 PC가 꺼지면 안내 칸이 답하지 않습니다.</dd></div>
             <div><dt>기술</dt><dd>Python, FastAPI, PostgreSQL + pgvector, multilingual-e5-small, Ollama(qwen2.5:1.5b), Docker, Windows 작업 스케줄러</dd></div>
           </dl>
-          <dl class="facts status" aria-label="연결 상태">
-            <div><dt>운영</dt><dd>Lolypoly 식단 화면의 ‘롤리폴리 안내’</dd></div>
-            <div><dt>로컬 검증</dt><dd>MARU 챗봇 아리 연동. 공개 사이트의 아리는 아직 기존 방식으로 답합니다.</dd></div>
-            <div><dt>준비 중</dt><dd>MARU용 공개 연결 경로</dd></div>
+          <dl class="status" aria-label="연결 상태">
+            <div><dt><span class="chip chip--live">운영</span></dt><dd>Lolypoly 식단 화면의 ‘롤리폴리 안내’</dd></div>
+            <div><dt><span class="chip">로컬 검증</span></dt><dd>MARU 챗봇 아리 연동. 공개 사이트의 아리는 아직 기존 방식으로 답합니다.</dd></div>
+            <div><dt><span class="chip chip--plan">준비 중</span></dt><dd>MARU용 공개 연결 경로</dd></div>
           </dl>
-          <div class="try">
-            <h3>직접 해보기</h3>
-            <ol class="steps">
+          <details class="try">
+            <summary>직접 해보기</summary>
+            <ol>
               <li>Lolypoly 식단 화면을 엽니다. 업데이트 안내 창이 뜨면 ‘확인’을 누릅니다.</li>
               <li>‘롤리폴리 안내에게 물어보기’에 적습니다. 예: 오늘 점심 뭐야? 성적우수장학금은 신입생도 1학기에 받을 수 있어?</li>
               <li>답 아래 출처를 눌러 학교 홈페이지 원문과 비교합니다.</li>
             </ol>
-            <div class="try-row">
-              <div class="actions">
-                <a class="btn btn--primary" href="https://lolypoly.lolypoly.workers.dev/meals/">식단 화면에서 해보기</a>
-                <a class="btn" href="https://github.com/lovesome0405/chatbot">엔진 저장소</a>
-              </div>
-              <figure class="qr">
-                <img src="assets/qr-rag.png" width="120" height="120" alt="Lolypoly 식단 화면 주소 QR 코드">
-                <figcaption>휴대폰으로 열기</figcaption>
-              </figure>
-            </div>
-            <p class="note note--after">안내 칸이 답하지 않으면 학교 PC가 꺼져 있는 경우입니다. 이 섹션의 화면 기록으로 대신 확인할 수 있습니다.</p>
+          </details>
+          <div class="cta">
+            <a class="btn btn--solid" href="https://lolypoly.lolypoly.workers.dev/meals/">식단 화면에서 해보기</a>
+            <a class="btn" href="https://github.com/lovesome0405/chatbot">엔진 저장소</a>
+            <figure class="qr"><img src="assets/qr-rag.png" width="88" height="88" alt="Lolypoly 식단 화면 주소 QR 코드"><figcaption>휴대폰으로 열기</figcaption></figure>
           </div>
-        </div>
-        <div class="stage stage--pair">
-          <figure class="shot">
-            <img src="assets/rag-lolypoly-live.jpg" width="716" height="954" loading="lazy" alt="롤리폴리 안내 화면. 성적우수장학금은 신입생도 1학기에 받을 수 있냐는 질문에 아니요, 신입생은 2학기부터 적용된다고 답하고 학교 장학제도 표의 해당 행을 출처로 보여 준다">
-            <figcaption>운영 화면, 2026-11-24. 장학 질문에 학교 장학표의 해당 행을 출처로 답합니다.</figcaption>
-          </figure>
-          <figure class="shot">
-            <img src="assets/rag-maru-local.jpg" width="716" height="926" loading="lazy" alt="MARU 아리 패널. 경복궁 근정전 월대에 지금 올라갈 수 있냐는 질문에 2026-09-02부터 10-31까지 출입이 제한되어 기준 날짜에는 올라갈 수 없다고 영어로 답하고 궁능유적본부 공지를 출처로 보여 준다">
-            <figcaption>MARU 로컬 연동, 2026-11-20. 기간이 정해진 공지를 기준 날짜와 비교해 답합니다.</figcaption>
-          </figure>
+          <p class="note">안내 칸이 답하지 않으면 학교 PC가 꺼져 있는 경우입니다. 이 섹션의 화면 기록으로 대신 확인할 수 있습니다.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section contact" id="contact" aria-labelledby="contact-title">
-    <div class="container">
-      <div>
-        <h2 id="contact-title">연락하기</h2>
-      </div>
-      <dl class="contact-lines">
+  <!-- 연락하기 -->
+  <section class="panel contact-panel" id="contact" data-chapter="contact" data-label="연락하기" aria-labelledby="contact-title">
+    <div class="panel-inner">
+      <h2 id="contact-title" class="reveal">연락하기</h2>
+      <dl class="contact reveal">
         <div><dt>이메일</dt><dd><a href="mailto:lovesome0405@naver.com">lovesome0405@naver.com</a></dd></div>
         <div><dt>GitHub</dt><dd><a href="https://github.com/lovesome0405">lovesome0405</a></dd></div>
       </dl>
@@ -370,5 +330,6 @@
   </section>
 </main>
 
+<script src="script.js" defer></script>
 </body>
 </html>
